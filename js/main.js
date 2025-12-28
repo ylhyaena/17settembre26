@@ -1,130 +1,66 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // --- CANVAS BACKGROUND ANIMATION ---
     const canvas = document.getElementById("canvas-bg");
     const ctx = canvas.getContext("2d");
-
     let particles = [];
-    const particleCount = 20; // Numero di cerchi "fluttuanti"
-    const colors = ["#7f9f8c", "#cf845e", "#e8e2d9", "#f8f3ec"]; // Colori del tuo tema
+    
+    // MODIFICA QUI: Colori delle bolle e quantità
+    const colors = ["#7f9f8c", "#cf845e", "#e8e2d9", "#ffffff"];
+    const particleCount = 25;
 
-    function resizeCanvas() {
+    function resize() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
 
     class Particle {
         constructor() {
+            this.init();
+        }
+        init() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.radius = Math.random() * 30 + 10; // Raggio tra 10 e 40
+            this.radius = Math.random() * 40 + 10;
             this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.speedX = (Math.random() - 0.5) * 0.5; // Velocità lenta
-            this.speedY = (Math.random() - 0.5) * 0.5;
-            this.opacity = Math.random() * 0.4 + 0.1; // Opacità bassa per effetto sfocato
+            this.opacity = Math.random() * 0.2 + 0.05;
+            this.speedX = (Math.random() - 0.5) * 0.4; // Lentezza
+            this.speedY = (Math.random() - 0.5) * 0.4;
         }
-
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${parseInt(this.color.slice(1, 3), 16)}, ${parseInt(this.color.slice(3, 5), 16)}, ${parseInt(this.color.slice(5, 7), 16)}, ${this.opacity})`;
+            ctx.fillStyle = this.color;
+            ctx.globalAlpha = this.opacity;
             ctx.fill();
         }
-
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
-
-            // Fai rimbalzare le particelle dai bordi
-            if (this.x + this.radius > canvas.width || this.x - this.radius < 0) {
-                this.speedX *= -1;
-            }
-            if (this.y + this.radius > canvas.height || this.y - this.radius < 0) {
-                this.speedY *= -1;
-            }
-
-            // Reset se escono troppo
-            if (this.x < -this.radius || this.x > canvas.width + this.radius ||
-                this.y < -this.radius || this.y > canvas.height + this.radius) {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-            }
+            if (this.x < -50 || this.x > canvas.width + 50) this.speedX *= -1;
+            if (this.y < -50 || this.y > canvas.height + 50) this.speedY *= -1;
         }
     }
 
-    function initParticles() {
+    function setup() {
+        resize();
         particles = [];
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
+        for (let i = 0; i < particleCount; i++) particles.push(new Particle());
     }
 
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Cancella il frame precedente
-        ctx.fillStyle = "#f8f3ec"; // Sfondo leggermente colorato per base
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-        }
-        requestAnimationFrame(animateParticles);
+    function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(loop);
     }
 
-    // Inizializza e avvia l'animazione
-    resizeCanvas();
-    initParticles();
-    animateParticles();
-    window.addEventListener("resize", () => {
-        resizeCanvas();
-        initParticles(); // Reinizializza le particelle al ridimensionamento
-    });
+    setup();
+    loop();
+    window.addEventListener("resize", setup);
 
-
-    // --- SCROLL REVEAL EFFECT ---
-    const sections = document.querySelectorAll(".section");
-
-    const observerOptions = {
-        root: null, // viewport
-        rootMargin: "0px",
-        threshold: 0.1 // Appare quando il 10% della sezione è visibile
-    };
-
-    const sectionObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target); // Ferma l'osservazione dopo l'animazione
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        sectionObserver.observe(section);
-    });
-
-    // --- NAVBAR TOGGLE (MOBILE) ---
-    const navToggle = document.querySelector(".nav-toggle");
-    const navList = document.querySelector(".nav-list");
-
-    navToggle.addEventListener("click", () => {
-        navList.classList.toggle("active");
-    });
-
-    // Chiudi il menu mobile quando si clicca su un link
-    navList.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            navList.classList.remove("active");
+    // FAQ Accordion
+    document.querySelectorAll(".faq-question").forEach(q => {
+        q.addEventListener("click", () => {
+            const ans = q.nextElementSibling;
+            ans.style.maxHeight = ans.style.maxHeight ? null : ans.scrollHeight + "px";
         });
     });
-
-    // --- FAQ ACCORDION ---
-    const faqQuestions = document.querySelectorAll(".faq-question");
-
-    faqQuestions.forEach(question => {
-        question.addEventListener("click", () => {
-            const answer = question.nextElementSibling;
-            question.classList.toggle("active");
-            answer.classList.toggle("open");
-
-            if (answer.classList.contains("open")) {
-                answer.style.maxHeight = answer.
+});
