@@ -1,122 +1,414 @@
 /* Impostazioni di base */
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  font-family: 'DM Sans', sans-serif;
-  color: #2d2d2d; /* Colore del testo principale */
-  line-height: 1.65;
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    color: #2d2d2d; /* Colore del testo principale */
+    line-height: 1.65;
+    background-color: #f8f3ec; /* Colore di fallback per il body */
 }
 
 /* Canvas (sfondo dinamico) */
 #canvas-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* Lo sfondo è dietro tutto il contenuto */
+    position: fixed; /* Lo sfondo rimane fisso mentre il contenuto scorre */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Larghezza viewport */
+    height: 100vh; /* Altezza viewport */
+    z-index: -1; /* Lo sfondo è dietro tutto il contenuto */
+    display: block; /* Assicurati che sia sempre un blocco */
 }
 
 /* Stili per l'header e la navigazione */
 .header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 64px;
-  background: rgba(248, 243, 236, 0.95);
-  backdrop-filter: blur(6px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 64px;
+    background: rgba(248, 243, 236, 0.95);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .header-inner {
-  width: 100%;
-  max-width: 900px;
-  padding: 0 1.4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    width: 100%;
+    max-width: 900px;
+    padding: 0 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .logo {
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #7f9f8c; /* Verde salvia */
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #7f9f8c; /* Verde salvia */
 }
 
 .nav {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
+}
+
+.nav-toggle {
+    display: none; /* Nascondi per desktop */
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #2d2d2d;
+    padding: 0.5rem;
 }
 
 .nav-list {
-  display: flex;
-  gap: 1.2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
+    display: flex;
+    gap: 1.2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
 }
 
 .nav-list a {
-  color: #2d2d2d; /* Colore del testo principale */
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  white-space: nowrap;
-  transition: color 0.3s ease;
+    color: #2d2d2d; /* Colore del testo principale */
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    white-space: nowrap;
+    transition: color 0.3s ease;
 }
 
 .nav-list a:hover {
-  color: #cf845e; /* Terracotta */
+    color: #cf845e; /* Terracotta */
+}
+
+/* CTA nella navbar */
+.nav-list .cta {
+    background-color: #cf845e; /* Terracotta */
+    color: #ffffff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-list .cta:hover {
+    background-color: #bb6d4a; /* Terracotta più scura */
+    color: #ffffff;
 }
 
 /* Sezioni */
 .section {
-  padding: 4rem 0;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    padding: 4rem 1.4rem; /* Aggiunto padding orizzontale */
+    opacity: 0; /* Inizialmente invisibile per l'effetto scroll reveal */
+    transform: translateY(24px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    position: relative; /* Per assicurarsi che il contenuto sia sopra il canvas */
+    z-index: 1; /* Il contenuto delle sezioni sarà sopra il canvas */
 }
 
 .section.visible {
-  opacity: 1;
-  transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section.alt {
+    background-color: #f3ede4; /* Sfondo leggermente diverso per sezioni alternate */
+}
+
+.container {
+    max-width: 800px; /* Larghezza massima del contenuto */
+    margin: 0 auto; /* Centra il contenuto */
+    padding: 0 1rem; /* Padding interno */
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    color: #2f4f3a; /* Verde bosco */
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.8rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 1rem;
 }
 
 /* Hero section */
 .hero {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  text-align: center;
+    padding-top: 8rem; /* Spazio per l'header fisso */
+    padding-bottom: 6rem;
+    text-align: center;
+    background-color: transparent; /* Il canvas fa da sfondo */
+    min-height: 100vh; /* La sezione hero occupa almeno l'intera altezza della viewport */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hero h1 {
-  color: #2f4f3a; /* Verde bosco */
-  font-size: 2.6rem;
+    font-size: 3.4rem;
+    margin-bottom: 0.5rem;
+    color: #2f4f3a;
 }
 
 .hero-meta {
-  color: #cf845e; /* Terracotta */
+    color: #cf845e; /* Terracotta */
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
 }
 
 .hero-text {
-  color: #2d2d2d;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    color: #4a4a4a;
+    font-size: 1.1rem;
 }
+
+/* Mappa */
+.map {
+    margin-top: 2rem;
+    overflow: hidden;
+    padding-bottom: 56.25%; /* Rapporto 16:9 per iframe responsivo */
+    position: relative;
+    height: 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.map iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    border: none;
+}
+
+/* Planimetria */
+.planimetria-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.planimetria-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Timeline Programma */
+.timeline {
+    list-style: none;
+    padding: 0;
+    margin: 2rem auto 0 auto;
+    max-width: 500px;
+}
+
+.timeline li {
+    background-color: #ffffff;
+    border-left: 4px solid #7f9f8c; /* Verde salvia */
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    font-size: 1.1rem;
+    transition: transform 0.2s ease-in-out;
+}
+
+.timeline li:hover {
+    transform: translateX(5px);
+}
+
+.timeline li strong {
+    color: #2f4f3a; /* Verde bosco */
+}
+
+/* RSVP Form */
+.form-wrapper {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.form-wrapper iframe {
+    width: 100%;
+    min-height: 800px;
+    border: none;
+}
+
+/* FAQ */
+.faq-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.faq-question {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2f4f3a;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: #7f9f8c;
+    transition: transform 0.3s ease;
+}
+
+.faq-question.active::after {
+    content: '−';
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 1.5rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    color: #4a4a4a;
+}
+
+.faq-answer.open {
+    max-height: 200px; /* Valore sufficientemente grande */
+    padding-bottom: 1.5rem;
+}
+
+
+/* Pulsanti */
+.button {
+    display: inline-block;
+    background-color: #7f9f8c; /* Verde salvia */
+    color: #ffffff;
+    padding: 0.8rem 1.8rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 1rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.button:hover {
+    background-color: #6a8875; /* Verde salvia più scuro */
+    transform: translateY(-2px);
+}
+
+.button.secondary {
+    background-color: #cf845e; /* Terracotta */
+}
+
+.button.secondary:hover {
+    background-color: #bb6d4a; /* Terracotta più scura */
+}
+
+p.muted {
+    font-size: 0.9rem;
+    color: #6a6a6a;
+}
+
 
 /* Footer */
 .footer {
-  text-align: center;
-  padding: 2.5rem 1rem;
-  font-size: 0.9rem;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    font-size: 0.9rem;
+    color: #4a4a4a;
+    background-color: #e8e2d9; /* Sfondo leggero per il footer */
+    margin-top: 4rem;
+}
+
+/* Media Queries per il Responsive */
+@media (max-width: 768px) {
+    .header-inner {
+        padding: 0 1rem;
+    }
+
+    .nav-list {
+        display: none; /* Nascondi la navbar di default su mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        background: rgba(248, 243, 236, 0.98);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        padding: 1rem 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-list.active {
+        display: flex; /* Mostra la navbar quando è attiva */
+    }
+
+    .nav-list li {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    .nav-list a {
+        padding: 0.5rem 1rem;
+        display: block;
+    }
+
+    .nav-toggle {
+        display: block; /* Mostra il toggle su mobile */
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .section {
+        padding: 3rem 1rem;
+    }
 }
