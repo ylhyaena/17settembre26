@@ -243,7 +243,7 @@ a:hover { color: var(--accent-secondary); }
   position: absolute;
 
   right: -220px;   /* tutto a destra ma VISIBILE subito */
-  bottom: -380px;  /* angolo basso-dx visibile all'apertura */
+  bottom: -480px;  /* angolo basso-dx visibile all'apertura */
 
   width: 560px;
   height: 560px;
