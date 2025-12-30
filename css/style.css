@@ -19,7 +19,7 @@
 
   --font-main: 'DM Sans', sans-serif;
 
-  /* parallax sole */
+  /* parallax sole (aggiornato via JS) */
   --sun-parallax: 0px;
 }
 
@@ -36,7 +36,6 @@ body {
   color: var(--text-main);
   line-height: 1.65;
 
-  /* SFONDO CARTA */
   background-color: var(--bg-main);
   background-image: url("../assets/bg-paper-desktop.png");
   background-repeat: repeat;
@@ -187,6 +186,7 @@ p { margin: 0.6rem 0; }
 .hero .container {
   position: relative;
   z-index: 3;
+  will-change: transform;
 }
 
 /* FOGLIE */
@@ -209,19 +209,19 @@ p { margin: 0.6rem 0; }
   content: "";
   position: absolute;
 
-  /* mobile-first: spinto a destra */
-  right: -160px;
-  top: 140px;
+  /* mobile-first: completamente a destra */
+  right: -260px;
+  top: 120px;
 
-  width: 420px;
-  height: 420px;
+  width: 520px;
+  height: 520px;
 
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
 
-  opacity: 0.85;
+  opacity: 0.88;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 
   transform: translate3d(0, var(--sun-parallax), 0);
   will-change: transform;
@@ -239,11 +239,11 @@ p { margin: 0.6rem 0; }
   }
 
   .hero::after {
-    right: -220px;
-    top: 120px;
-    width: 560px;
-    height: 560px;
-    opacity: 0.9;
+    right: -300px;
+    top: 100px;
+    width: 700px;
+    height: 700px;
+    opacity: 0.92;
   }
 }
 
@@ -262,7 +262,35 @@ p { margin: 0.6rem 0; }
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
   margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
+
+.timeline li:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
+}
+
+/* =======================
+   BUTTON
+======================= */
+.button {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  background: var(--accent-tertiary);
+  color: white;
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.button.secondary { background: var(--accent-secondary); }
 
 /* =======================
    FAQ
@@ -284,14 +312,14 @@ p { margin: 0.6rem 0; }
   align-items: center;
 }
 
-.faq-question::after { content: '+'; }
+.faq-question::after { content: '+'; font-size: 1.3rem; }
 
 .faq-question.open::after { content: '–'; }
 
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease;
+  transition: max-height 0.4s ease, padding 0.4s ease;
 }
 
 .faq-answer.open {
@@ -317,9 +345,7 @@ p { margin: 0.6rem 0; }
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.planimetria-image:hover {
-  transform: rotate(90deg) scale(1.03);
-}
+.planimetria-image:hover { transform: rotate(90deg) scale(1.03); }
 
 @media (max-width: 768px) {
   .planimetria-image { transform: rotate(0deg); }
@@ -382,4 +408,6 @@ p { margin: 0.6rem 0; }
   .nav-list.open { display: flex; }
 
   .nav-list li { padding: 0.5rem 0; }
+
+  .button { width: 100%; text-align: center; }
 }
