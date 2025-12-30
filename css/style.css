@@ -3,40 +3,64 @@
 ======================= */
 :root {
   --bg-main: #f8f3ec;
+  --bg-alt: #efe4d8;
+
   --text-main: #2d2d2d;
+  --text-muted: rgba(45, 45, 45, 0.75);
 
-  --accent-primary: #7f9f8c;
-  --accent-secondary: #cf845e;
-  --accent-tertiary: #2f4f3a;
+  --accent-primary: #7f9f8c;   /* salvia */
+  --accent-secondary: #cf845e; /* terracotta */
+  --accent-tertiary: #2f4f3a;  /* bosco */
 
-  --font-main: 'DM Sans', sans-serif;
+  --radius-soft: 12px;
+  --radius-small: 6px;
+
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.12);
+
+  --font-main: "DM Sans", sans-serif;
+
+  --header-h: 64px;
 }
 
 /* =======================
-   RESET
+   RESET / BASE
 ======================= */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   font-family: var(--font-main);
   color: var(--text-main);
-  background: none;
+  line-height: 1.65;
+  background: none; /* lo sfondo lo gestisce .paper-bg */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a { color: inherit; }
+
+.container {
+  max-width: 900px;
+  padding: 0 1.4rem;
+  margin: 0 auto;
 }
 
 /* =======================
-   SFONDO CARTA (MOBILE FIRST)
+   SFONDO CARTA (LAYER DEDICATO)
+   HTML: <div class="paper-bg"></div> subito dopo <body>
 ======================= */
 .paper-bg {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;             /* layer base */
+  pointer-events: none;   /* non blocca click/tap */
 
   background-color: var(--bg-main);
   background-image: url("../assets/bg-paper-mobile.png");
@@ -44,9 +68,7 @@ body {
   background-size: 420px;
 }
 
-/* =======================
-   DESKTOP BACKGROUND
-======================= */
+/* Desktop background */
 @media (min-width: 769px) {
   .paper-bg {
     background-image: url("../assets/bg-paper-desktop.png");
@@ -54,17 +76,25 @@ body {
   }
 }
 
-/* =======================
-   LAYOUT
-======================= */
-.container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 1.4rem;
+/* Tutto il contenuto sta sopra lo sfondo */
+.header,
+.section,
+.footer {
+  position: relative;
+  z-index: 2;
 }
 
-.section {
-  padding: 4rem 0;
+/* =======================
+   SCROLL PROGRESS BAR (se usi il JS che lo crea)
+======================= */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--accent-secondary);
+  z-index: 2000;
 }
 
 /* =======================
@@ -73,81 +103,323 @@ body {
 .header {
   position: fixed;
   top: 0;
-  width: 100%;
-  height: 64px;
-  background: rgba(248, 243, 236, 0.95);
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(248, 243, 236, 0.94);
   backdrop-filter: blur(6px);
-  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  z-index: 1000;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--accent-primary);
+  white-space: nowrap;
 }
 
 /* =======================
-   HERO
+   NAV
+======================= */
+.nav { position: relative; display: flex; align-items: center; }
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+  border: 0;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.35rem 0.55rem;
+  border-radius: var(--radius-small);
+}
+
+.nav-toggle:active { transform: scale(0.98); }
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.nav-list a {
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-list a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent-secondary);
+  transition: width 0.25s ease;
+}
+
+.nav-list a:hover::after { width: 100%; }
+
+.nav-list a.cta {
+  background: var(--accent-tertiary);
+  color: #fff;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-small);
+}
+
+.nav-list a.cta::after { display: none; }
+
+/* =======================
+   SEZIONI + ANIMAZIONE FADE-IN
+======================= */
+.section {
+  padding: 4rem 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* la prima sezione (hero) parte sotto l’header */
+.hero.section {
+  padding-top: calc(var(--header-h) + 2.5rem);
+  padding-bottom: 4rem;
+}
+
+.section.alt {
+  background: linear-gradient(to bottom, rgba(239, 228, 216, 0.92), rgba(245, 237, 230, 0.92));
+}
+
+.section.highlight {
+  background: var(--accent-tertiary);
+  color: #fff;
+}
+
+/* =======================
+   TITOLI
+======================= */
+h1, h2 { margin: 0 0 1rem 0; }
+
+h1 { font-size: 2.1rem; line-height: 1.15; }
+h2 { font-size: 1.8rem; color: var(--accent-primary); }
+
+.section.highlight h2 { color: #fff; }
+
+.hero-meta { color: var(--text-muted); margin: 0 0 1rem 0; }
+.section.highlight p { color: rgba(255,255,255,0.92); }
+
+/* =======================
+   HERO DECORAZIONI (MOBILE-FIRST)
 ======================= */
 .hero {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
   position: relative;
   overflow: hidden;
 }
 
+/* assicura che il testo stia sopra alle decorazioni */
 .hero .container {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
-/* sole decorativo */
+/* Botanica: anche su mobile */
 .hero::before {
   content: "";
   position: absolute;
-
-  /* mobile-first positioning */
   left: -40px;
-  top: 20px;
+  top: 22px;
   width: 180px;
   height: 320px;
 
-  background: url("../assets/—Pngtree—antiquity black and white ink_3911022.png")
-    no-repeat left top;
+  background: url("../assets/leaves.png") no-repeat left top;
   background-size: contain;
 
-  opacity: 0.08; /* fondamentale su mobile */
+  opacity: 0.085;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
+/* Sole: anche su mobile */
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -55px;
+  top: -35px;
+  width: 190px;
+  height: 190px;
 
-/* =======================
-   DESKTOP DECORAZIONI
-======================= */
+  background: url("../assets/sun.png") no-repeat center;
+  background-size: contain;
+
+  opacity: 0.48;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Desktop: potenziamento decorazioni */
 @media (min-width: 769px) {
   .hero::before {
-    content: "";
-    position: absolute;
     left: -90px;
     top: 0;
     width: 300px;
     height: 100%;
     opacity: 0.12;
-    background: url("../assets/leaves.png") no-repeat left center;
-    background-size: contain;
-    opacity: 0.12;
-    pointer-events: none;
   }
 
   .hero::after {
-  content: "";
-  position: absolute;
-  right: -50px;
-  top: -30px;
-  width: 180px;
-  height: 180px;
-
-  background: url("../assets/Save the Date (15).png") no-repeat center;
-  background-size: contain;
-
-  opacity: 0.45;
-  pointer-events: none;
-  z-index: 1;
+    right: -120px;
+    top: 80px;
+    width: 360px;
+    height: 360px;
+    opacity: 0.9;
+  }
 }
 
+/* =======================
+   TIMELINE
+======================= */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
+
+.timeline li {
+  background: rgba(255,255,255,0.92);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1rem;
+}
+
+/* =======================
+   FAQ (compatibile col tuo JS)
+======================= */
+.faq-item {
+  background: rgba(255,255,255,0.92);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 1rem 1rem;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.faq-question::after {
+  content: "+";
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.faq-question.open::after { content: "–"; }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  padding: 0 1rem;
+}
+
+.faq-answer.open {
+  max-height: 420px;
+  padding-bottom: 1rem;
+}
+
+/* =======================
+   MAP
+======================= */
+.map iframe {
+  width: 100%;
+  border: 0;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  min-height: 320px;
+}
+
+/* =======================
+   FOOTER
+======================= */
+.footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* =======================
+   MOBILE NAV (MOBILE-FIRST)
+======================= */
+@media (max-width: 768px) {
+  h1 { font-size: 1.65rem; }
+  h2 { font-size: 1.4rem; }
+
+  .header-inner { position: relative; }
+
+  /* dropdown menu mobile */
+  .nav-list {
+    display: none;
+    position: absolute;
+    top: calc(var(--header-h) - 6px);
+    right: 0;
+
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+
+    width: min(340px, calc(100vw - 2rem));
+    padding: 1rem;
+
+    background: rgba(248, 243, 236, 0.98);
+    border-radius: var(--radius-soft);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .nav-list.open { display: flex; }
+}
+
+/* Desktop: hamburger nascosto */
+@media (min-width: 769px) {
+  .nav-toggle { display: none; }
 }
