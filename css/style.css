@@ -275,7 +275,7 @@ main {
 .hero::after {
   content: "";
   position: absolute;
-  top: 35%;
+  top: 20%;
   right: -40px;          /* tutto a destra ma già visibile */
   width: 720px;
   height: 720px;
@@ -515,7 +515,7 @@ main {
     width: 520px;
     height: 520px;
     right: -260px;
-    top: 35%;
+    top: 20%;
   }
 }
 
