@@ -9,9 +9,9 @@
 
   --text-main: #2d2d2d;
 
-  --accent-primary: #7f9f8c;
-  --accent-secondary: #cf845e;
-  --accent-tertiary: #2f4f3a;
+  --accent-primary: #7f9f8c;   /* salvia */
+  --accent-secondary: #cf845e; /* terracotta */
+  --accent-tertiary: #2f4f3a;  /* bosco */
 
   --radius-soft: 12px;
   --radius-small: 6px;
@@ -36,12 +36,17 @@ body {
   margin: 0;
   font-family: var(--font-main);
   color: var(--text-main);
+  background: var(--bg-main);
   line-height: 1.65;
 
-  background-color: var(--bg-main);
+  /* SFONDO CARTA */
   background-image: url("../assets/bg-paper.png");
   background-repeat: repeat;
   background-size: 520px;
+}
+
+main {
+  padding-top: 64px; /* spazio per header fixed */
 }
 
 .container {
@@ -88,7 +93,6 @@ body {
 .nav {
   display: flex;
   align-items: center;
-  position: relative;
 }
 
 .nav-list {
@@ -106,6 +110,7 @@ body {
   font-weight: 500;
   position: relative;
   white-space: nowrap;
+  transition: color 0.3s ease;
 }
 
 .nav-list a::after {
@@ -126,6 +131,13 @@ body {
   color: white;
   padding: 0.45rem 0.9rem;
   border-radius: var(--radius-small);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-list a.cta:hover {
+  background: var(--accent-secondary);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
 }
 
 .nav-toggle {
@@ -153,8 +165,8 @@ body {
 }
 
 .section.alt {
-  background-color: var(--bg-alt);
-  background-image: none;
+  background: linear-gradient(to bottom, #efe4d8, #f5ede6);
+  background-image: none; /* niente carta sotto nelle sezioni beige */
 }
 
 .section.highlight {
@@ -165,7 +177,9 @@ body {
 /* =======================
    TITOLI / TESTO
 ======================= */
-h1, h2 { margin: 0 0 1rem 0; }
+h1, h2 {
+  margin: 0 0 1rem 0;
+}
 
 h1 {
   font-size: 2.2rem;
@@ -180,13 +194,27 @@ h2 {
 p { margin: 0.6rem 0; }
 
 /* =======================
-   HERO
+   LINK
+======================= */
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover { color: var(--accent-secondary); }
+
+/* =======================
+   HERO + DECORAZIONI
 ======================= */
 .hero {
-  padding-top: 7rem;   /* spazio per header fixed */
-  padding-bottom: 6rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
   position: relative;
   overflow: hidden;
+
+  /* variabile usata dal sole */
+  --sun-parallax: 0px;
 }
 
 .hero .container {
@@ -194,7 +222,7 @@ p { margin: 0.6rem 0; }
   z-index: 3;
 }
 
-/* FOGLIE */
+/* FOGLIE (mobile-first, poi aumenta su desktop) */
 .hero::before {
   content: "";
   position: absolute;
@@ -209,17 +237,13 @@ p { margin: 0.6rem 0; }
   z-index: 1;
 }
 
-/* SOLE
-   - VISIBILE SUBITO all'apertura (basso-destra)
-   - SALE con parallax (JS modifica --sun-parallax)
-*/
+/* SOLE: visibile subito in basso a destra, poi sale con parallax */
 .hero::after {
   content: "";
   position: absolute;
 
-  /* angolo in basso a destra, ma VISIBILE subito */
-  right: -220px;
-  bottom: -140px;
+  right: -220px;   /* tutto a destra ma VISIBILE subito */
+  bottom: -140px;  /* angolo basso-dx visibile all'apertura */
 
   width: 560px;
   height: 560px;
@@ -235,32 +259,6 @@ p { margin: 0.6rem 0; }
   will-change: transform;
 }
 
-@media (min-width: 769px) {
-  h1 { font-size: 2.6rem; }
-  h2 { font-size: 2rem; }
-
-  .hero {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
-  .hero::before {
-    left: -90px;
-    top: 0;
-    width: 320px;
-    height: 100%;
-    opacity: 0.12;
-  }
-
-  .hero::after {
-    right: -320px;
-    bottom: -180px;
-    width: 720px;
-    height: 720px;
-    opacity: 0.92;
-  }
-}
-
 /* =======================
    TIMELINE
 ======================= */
@@ -271,15 +269,51 @@ p { margin: 0.6rem 0; }
 }
 
 .timeline li {
+  position: relative;
   background: white;
   padding: 1rem 1.2rem;
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
   margin-bottom: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.timeline li:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: white;
 }
 
 /* =======================
-   FAQ (sezione pronta, non rompe nulla se presente)
+   BUTTON
+======================= */
+.button {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  background: var(--accent-tertiary);
+  color: white;
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.button.secondary { background: var(--accent-secondary); }
+
+.button.cta { animation: pulse 2.5s infinite; }
+
+@keyframes pulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* =======================
+   FAQ
 ======================= */
 .faq-item {
   background: white;
@@ -296,10 +330,21 @@ p { margin: 0.6rem 0; }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: color 0.3s ease;
 }
 
-.faq-question::after { content: '+'; font-size: 1.3rem; }
-.faq-question.open::after { content: '–'; }
+.faq-question.open { color: var(--accent-secondary); }
+
+.faq-question::after {
+  content: '+';
+  font-size: 1.3rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.faq-question.open::after {
+  transform: rotate(45deg);
+  color: var(--accent-secondary);
+}
 
 .faq-answer {
   max-height: 0;
@@ -313,6 +358,33 @@ p { margin: 0.6rem 0; }
 }
 
 /* =======================
+   PLANIMETRIA
+======================= */
+.planimetria-container {
+  text-align: center;
+  margin: 4rem 0 6rem 0;
+}
+
+.planimetria-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  transform: rotate(90deg);
+  transform-origin: center center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.planimetria-image:hover {
+  transform: rotate(90deg) scale(1.03);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .planimetria-image { transform: rotate(0deg); }
+}
+
+/* =======================
    MAP
 ======================= */
 .map iframe {
@@ -320,7 +392,7 @@ p { margin: 0.6rem 0; }
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
   min-height: 300px;
-  border: none;
+  border: 0;
 }
 
 /* =======================
@@ -353,6 +425,11 @@ p { margin: 0.6rem 0; }
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.5rem; }
 
+  .hero {
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+  }
+
   .nav-toggle { display: block; }
 
   .nav-list {
@@ -370,4 +447,35 @@ p { margin: 0.6rem 0; }
   .nav-list.open { display: flex; }
 
   .nav-list li { padding: 0.5rem 0; }
+
+  .button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =======================
+   DESKTOP
+======================= */
+@media (min-width: 769px) {
+  h1 { font-size: 2.6rem; }
+  h2 { font-size: 2rem; }
+
+  .hero { padding-top: 6rem; padding-bottom: 6rem; }
+
+  .hero::before {
+    left: -90px;
+    top: 0;
+    width: 320px;
+    height: 100%;
+    opacity: 0.12;
+  }
+
+  .hero::after {
+    right: -340px;
+    bottom: -200px;
+    width: 720px;
+    height: 720px;
+    opacity: 0.92;
+  }
 }
