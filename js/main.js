@@ -6,7 +6,7 @@
 // 0.03 = lentissimo
 // 0.06 = lento (consigliato)
 // 0.10 = evidente
-const SUN_PARALLAX_SPEED = 0.06;
+const SUN_PARALLAX_SPEED = 0.03;
 
 
 // =======================
