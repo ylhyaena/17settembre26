@@ -97,6 +97,12 @@ a { color: inherit; }
   z-index: 2000;
 }
 
+@media (max-width: 768px){
+  #scrollProgress{
+    height: 4px; /* più visibile su mobile */
+  }
+}
+
 /* =======================
    HEADER
 ======================= */
