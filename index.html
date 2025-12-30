@@ -22,256 +22,233 @@
       <nav class="nav">
         <button class="nav-toggle" aria-label="Apri menu">☰</button>
         <ul class="nav-list">
-          <li><a href="#matrimonio">Il matrimonio</a></li>
+          <li><a href="#intro">Intro</a></li>
           <li><a href="#location">Location</a></li>
           <li><a href="#programma">Programma</a></li>
-          <li><a href="#come-arrivare">Come arrivare</a></li>
-          <li><a href="#rsvp" class="cta">RSVP</a></li>
+          <li><a href="#partecipazione" class="cta">Partecipa</a></li>
+          <li><a href="#viaggio">Viaggio di nozze</a></li>
+          <li><a href="#sogno">Il nostro sogno</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#regalo">Regalo</a></li>
           <li><a href="#foto">Foto</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero section">
-    <div class="container">
-      <h1><br>Manuel e Ylenia</h1>
-      <p class="hero-meta">17 Settembre 2026 · Scandriglia (RI)</p>
-      <p class="hero-text">
-        Ci siamo!<br><br>
+  <main>
+    <!-- 1. TESTO INTRODUTTIVO (CARTA + SOLE PARALLAX) -->
+    <section id="intro" class="hero section section--paper section--sun">
+      <div class="container">
+        <h1><br>Manuel e Ylenia</h1>
+        <p class="hero-meta">17 Settembre 2026 · Scandriglia (RI)</p>
+        <p class="hero-text">
+          Ci siamo!<br><br>
 
-        Abbiamo creato questo spazio per raccogliere tutte le informazioni relative al nostro matrimonio: dalla location agli orari, fino a tutti i dettagli pratici per partecipare alla cerimonia.<br><br>
+          Abbiamo creato questo spazio per raccogliere tutte le informazioni relative al nostro matrimonio: dalla location agli orari, fino a tutti i dettagli pratici per partecipare alla cerimonia.<br><br>
 
-        La nostra scelta è stata un matrimonio di giorno, immerso nel verde a Scandriglia, e siamo felici di potervi raccontare ogni dettaglio tramite questa pagina.<br><br>
+          La nostra scelta è stata un matrimonio di giorno, immerso nel verde a Scandriglia, e siamo felici di potervi raccontare ogni dettaglio tramite questa pagina.<br><br>
 
-        Per confermare la vostra partecipazione e farci sapere eventuali esigenze alimentari, vi chiediamo di compilare il form incorporato in questa pagina.<br><br>
+          Per confermare la vostra partecipazione e farci sapere eventuali esigenze alimentari, vi chiediamo di compilare il form incorporato in questa pagina.<br><br>
 
-        Vi invitiamo a visitare frequentemente per restare aggiornati su ogni novità. Non vediamo l’ora di festeggiare insieme a voi!<br><br>
+          Vi invitiamo a visitare frequentemente per restare aggiornati su ogni novità. Non vediamo l’ora di festeggiare insieme a voi!<br><br>
 
-        Manuel e Ylenia
-      </p>
-    </div>
-  </section>
-
-  <!-- IL MATRIMONIO -->
-  <section id="matrimonio" class="section">
-    <div class="container">
-      <h2>Il matrimonio</h2>
-      <p>
-        Matrimonio civile autentico.
-        Cerimonia e ricevimento nello stesso luogo.
-      </p>
-      <p>
-        Vi aspettiamo per una giornata all'insegna della semplicità,
-        dell'autenticità e soprattutto della compagnia.
-      </p>
-    </div>
-  </section>
-
-  <!-- LOCATION -->
-  <section id="location" class="section alt">
-    <div class="container">
-      <h2>Location</h2>
-      <p>La location si trova a Scandriglia (RI), parcheggi disponibili in loco.</p>
-
-      <div class="map">
-        <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1rst3JBqXOchLhLZ3rrkD9J8SI2pks34&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+          Manuel e Ylenia
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PLANIMETRIA -->
-  <section id="planimetria" class="section alt">
-    <div class="container">
-      <h2>Planimetria della location</h2>
-      <p>Ecco la planimetria per orientarvi meglio.<br><br></p>
+    <!-- 2. LA LOCATION (MAPPA + PLANIMETRIA) (CARTA) -->
+    <section id="location" class="section section--paper">
+      <div class="container">
+        <h2>La location</h2>
+        <p>La location si trova a Scandriglia (RI), parcheggi disponibili in loco.</p>
 
-      <div class="planimetria-container">
-        <img src="assets/planimetria.png" alt="Planimetria location" class="planimetria-image">
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps/d/u/0/embed?mid=1rst3JBqXOchLhLZ3rrkD9J8SI2pks34&ehbc=2E312F&noprof=1"
+            width="640"
+            height="480"
+            title="Mappa Google"
+          ></iframe>
+        </div>
+
+        <div class="planimetria-block">
+          <h3>Planimetria</h3>
+          <p>Ecco la planimetria per orientarvi meglio.</p>
+
+          <div class="planimetria-container">
+            <img src="assets/planimetria.png" alt="Planimetria location" class="planimetria-image">
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PROGRAMMA -->
-  <section id="programma" class="section">
-    <div class="container">
-      <h2>Programma della giornata</h2>
-      <p>Questo è quello che potete aspettarvi (più o meno puntuale).</p>
+    <!-- 3. PROGRAMMA DELLA GIORNATA (BEIGE + LEAVES) -->
+    <section id="programma" class="section section--beige section--leaves">
+      <div class="container">
+        <h2>Programma della giornata</h2>
+        <p>Questo è quello che potete aspettarvi (più o meno puntuale).</p>
 
-      <ul class="timeline">
-        <li><strong>11:00</strong> – Arrivo invitati</li>
-        <li><strong>11:30</strong> – Cerimonia civile</li>
-        <li><strong>12:00</strong> – Aperitivo</li>
-        <li><strong>14:00</strong> – Pranzo</li>
-        <li><strong>16:00</strong> – Torta</li>
-        <li><strong>16:30</strong> – Musica!</li>
-        <li><strong>18:00</strong> – Baci e abbracci</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- COME ARRIVARE -->
-  <section id="come-arrivare" class="section alt">
-    <div class="container">
-      <h2>Come arrivare</h2>
-      <p>
-        La location si trova a [Città/Area].
-        Parcheggi disponibili in loco.
-      </p>
-
-      <p>
-        <strong>Indirizzo:</strong><br>
-        Strada Passo di S. Salvatore, 16<br>
-        02038 Scandriglia (RI)
-      </p>
-
-      <p>
-        <strong>In auto:</strong><br>
-        [Indicazioni generali per chi arriva in auto]
-      </p>
-
-      <p>
-        <strong>Parcheggi:</strong><br>
-        [Indicazioni su parcheggi disponibili]
-      </p>
-    </div>
-  </section>
-
-  <!-- RSVP -->
-  <section id="rsvp" class="section highlight">
-    <div class="container">
-      <h2>RSVP</h2>
-      <p>
-        Per favore, confermate la presence per ogni persona invitata.
-        Bastano due minuti e ci aiuta a organizzare al meglio.
-      </p>
-
-      <div class="form-wrapper">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeB459Lh6XBT8R19BAUzuZX_jGAO_TO8RUJ_Jvz4HRvgQHFUg/viewform?embedded=true" style="width: 100%; min-height: 800px; border: none;"></iframe>
+        <ul class="timeline">
+          <li><strong>11:00</strong> – Arrivo invitati</li>
+          <li><strong>11:30</strong> – Cerimonia civile</li>
+          <li><strong>12:00</strong> – Aperitivo</li>
+          <li><strong>14:00</strong> – Pranzo</li>
+          <li><strong>16:00</strong> – Torta</li>
+          <li><strong>16:30</strong> – Musica!</li>
+          <li><strong>18:00</strong> – Baci e abbracci</li>
+        </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container">
-      <h2>FAQ</h2>
-      <p>Prima che ci scriviate in trenta. 😉</p>
+    <!-- 4. MODULO PER LA PARTECIPAZIONE (CARTA) -->
+    <section id="partecipazione" class="section section--paper">
+      <div class="container">
+        <h2>Modulo per la partecipazione</h2>
+        <p>
+          Per favore, confermate la presenza per ogni persona invitata.
+          Bastano due minuti e ci aiuta a organizzare al meglio.
+        </p>
 
-      <div class="faq-item">
-        <button class="faq-question">Posso portare i bambini?</button>
-        <div class="faq-answer">
-          <p>
-            Certo! I bambini sono benvenuti.
-            Se allergie o esigenze particolari, segnalate nel form RSVP.
+        <div class="form-wrapper">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSeB459Lh6XBT8R19BAUzuZX_jGAO_TO8RUJ_Jvz4HRvgQHFUg/viewform?embedded=true"
+            style="width: 100%; min-height: 800px; border: none;"
+            title="Modulo di partecipazione"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. IL VIAGGIO DI NOZZE (BEIGE + LEAVES) -->
+    <section id="viaggio" class="section section--beige section--leaves">
+      <div class="container">
+        <h2>Il viaggio di nozze</h2>
+        <p>
+          Stiamo organizzando il nostro viaggio di nozze e aggiorneremo questa sezione con i dettagli.
+          Se vi va di sostenerci, qui sotto trovate le informazioni utili.
+        </p>
+
+        <div class="card">
+          <h3>Contributo libero</h3>
+          <p class="muted">
+            Se desiderate farci un pensiero, potete contribuire al nostro viaggio di nozze.
+          </p>
+          <p class="iban">
+            IT60X0542811101000000123456
           </p>
         </div>
       </div>
+    </section>
 
-      <div class="faq-item">
-        <button class="faq-question">A che ora devo arrivare?</button>
-        <div class="faq-answer">
-          <p>
-            Idealmente tra le 15:15 e le 15:45.
-            La cerimonia inizia alle 16:00 in punto, non vogliamo che vi perderete il bello.
+    <!-- 6. IL NOSTRO SOGNO (CARTA) -->
+    <section id="sogno" class="section section--paper">
+      <div class="container">
+        <h2>Il nostro sogno</h2>
+        <p>
+          Il nostro sogno è un camper.
+          Se vi va di sostenerci in questo progetto, potete usare l’IBAN qui sotto.
+        </p>
+
+        <div class="card">
+          <h3>IBAN</h3>
+          <p class="iban">
+            IT60X0542811101000000123456
+          </p>
+          <p class="muted" style="margin-top: 0.8rem;">
+            Grazie di cuore: qualunque contributo, anche piccolo, fa la differenza.
           </p>
         </div>
       </div>
+    </section>
 
-      <div class="faq-item">
-        <button class="faq-question">È obbligatorio un regalo?</button>
-        <div class="faq-answer">
-          <p>
-            Ma no! La vostra presence è il regalo più importante.
-            Se volete comunque fare qualcosa, la vostra compagnia e le vostre foto valgono più di mille cose.
-          </p>
+    <!-- 7. FAQ (BEIGE + LEAVES) -->
+    <section id="faq" class="section section--beige section--leaves">
+      <div class="container">
+        <h2>FAQ</h2>
+        <p>Le domande più frequenti.</p>
+
+        <div class="faq-item">
+          <button class="faq-question">Posso portare i bambini?</button>
+          <div class="faq-answer">
+            <p>
+              Certo! I bambini sono benvenuti.
+              Se allergie o esigenze particolari, segnalate nel form.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">A che ora devo arrivare?</button>
+          <div class="faq-answer">
+            <p>
+              Idealmente tra le 11:00 e le 11:20.
+              La cerimonia inizia alle 11:30 in punto.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">È obbligatorio un regalo?</button>
+          <div class="faq-answer">
+            <p>
+              No: la vostra presenza è il regalo più importante.
+              Se volete, potete contribuire al viaggio di nozze o al nostro sogno.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">Che cosa devo indossare?</button>
+          <div class="faq-answer">
+            <p>
+              Vestiti comodi e belli, come per una festa in campagna.
+              Niente dress code formale.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">E se piove?</button>
+          <div class="faq-answer">
+            <p>
+              Niente paura: la location ha spazi coperti.
+              La giornata si farà comunque.
+            </p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="faq-item">
-        <button class="faq-question">Che cosa devo indossare?</button>
-        <div class="faq-answer">
-          <p>
-            Vestiti comodi e belli, come se andaste a una cena con amici.
-            Niente dress code formale: semplicità e autenticità.
-          </p>
-        </div>
+    <!-- 8. LINK PER CARICARE LE FOTO (CARTA) -->
+    <section id="foto" class="section section--paper">
+      <div class="container">
+        <h2>Link per caricare le foto dell’evento</h2>
+        <p>
+          Se fate foto durante la giornata, condividetele con noi:
+          vi basta aprire la cartella Drive e caricare gli scatti.
+        </p>
+
+        <a href="#" class="button secondary">Carica le foto</a>
+
+        <p class="muted" style="margin-top: 1rem;">
+          Il link definitivo sarà disponibile a breve.
+        </p>
       </div>
+    </section>
 
-      <div class="faq-item">
-        <button class="faq-question">Posso portare un ospite non sulla lista?</button>
-        <div class="faq-answer">
-          <p>
-            Meglio contattarci prima. Cerchiamo di organizzare al meglio,
-            quindi se avete un'esigenza speciale, scrivete direttamente.
-          </p>
-        </div>
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <p>
+          Manuel Di Castro &amp; Ylenia Piromalli<br>
+          17 Settembre 2026<br>
+          <br>
+          Grazie di cuore per essere parte di questa giornata.
+        </p>
       </div>
-
-      <div class="faq-item">
-        <button class="faq-question">E se piove?</button>
-        <div class="faq-answer">
-          <p>
-            Niente paura! La location ha spazi coperti.
-            Il matrimonio si farà comunque, pioggia o sole.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REGALO -->
-  <section id="regalo" class="section alt">
-    <div class="container">
-      <h2>Regalo</h2>
-      <p>
-        La vostra presenza è il regalo più bello che possiamo ricevere! Se però volete farci un pensiero in più, ci piacerebbe che condivideste con noi le foto fatte durante il matrimonio.
-      </p>
-      <p>
-        Nella cartella Drive troverete già alcune foto caricate da noi. A fine evento, se volete, caricate le vostre foto lì.
-      </p>
-      <a href="#" class="button secondary">Accedi alla cartella foto</a>
-      <p class="muted" style="margin-top: 1rem;">
-        Il link sarà disponibile a breve. Vi arriverà via email dopo la conferma della presenza.
-      </p>
-      <p style="margin-top: 2rem;">
-        Se volete farci un regalo materiale, il nostro sogno sarebbe un camper! Se desiderate sostenerci economicamente per acquistarlo, ecco l'IBAN:
-      </p>
-      <p style="font-weight: bold; font-family: monospace; background: #f5f5f5; padding: 1rem; border-radius: 4px;">
-        IT60X0542811101000000123456
-      </p>
-    </div>
-  </section>
-
-  <!-- FOTO -->
-  <section id="foto" class="section alt">
-    <div class="container">
-      <h2>Le vostre foto</h2>
-      <p>
-        Se fate foto durante la giornata, condividetele con noi!
-        Vi basta accedere alla cartella Drive (link sotto) e caricare gli scatti.
-      </p>
-      <a href="#" class="button secondary">Carica le foto</a>
-      <p class="muted" style="margin-top: 1rem;">
-        Il link per caricare le foto sarà disponibile a breve. Vi arriverà via email dopo la conferma della presenza.
-      </p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <p>
-        Manuel Di Castro &amp; Ylenia Piromalli<br>
-        17 Settembre 2026<br>
-        <br>
-        Grazie di cuore per essere parte di questa giornata. 💚
-      </p>
-    </div>
-  </footer>
+    </footer>
+  </main>
 
   <script src="js/main.js"></script>
 </body>
