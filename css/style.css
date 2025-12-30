@@ -247,7 +247,7 @@ a:hover { color: var(--accent-secondary); }
   content: "";
   position: absolute;
   right: -220px;
-  bottom: -480px;
+  bottom: -760px;
   width: 560px;
   height: 560px;
   background: url("../assets/sun.png") no-repeat center;
