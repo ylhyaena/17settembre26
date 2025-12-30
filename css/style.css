@@ -211,7 +211,7 @@ p { margin: 0.6rem 0; }
 
   /* mobile-first: completamente a destra */
   right: -260px;
-  top: 120px;
+  top: 220px;
 
   width: 520px;
   height: 520px;
@@ -240,7 +240,7 @@ p { margin: 0.6rem 0; }
 
   .hero::after {
     right: -300px;
-    top: 200px;
+    top: 300px;
     width: 700px;
     height: 700px;
     opacity: 0.8;
