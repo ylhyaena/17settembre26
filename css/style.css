@@ -69,24 +69,15 @@ main {
   z-index: 2;
 }
 
-/* =======================
-   LOGICA SFONDI (FIX)
-======================= */
+/* ==================================================
+   LOGICA SFONDI AUTOMATICA (PARI / DISPARI)
+================================================== */
 
-/* SEZIONI PARI → CARTA */
-.section:nth-of-type(even) {
-  background-color: var(--bg-main);
-  background-image: url("../assets/bg-paper.png");
-  background-repeat: repeat;
-  background-size: 520px;
-}
-
-/* SEZIONI DISPARI → BEIGE */
+/* -------- SEZIONI DISPARI → BEIGE + FOGLIE -------- */
 .section:nth-of-type(odd) {
   background: linear-gradient(to bottom, #efe4d8, #f5ede6);
 }
 
-/* ELEMENTO FOGLIE SOLO SULLE DISPARI */
 .section:nth-of-type(odd)::before {
   content: "";
   position: absolute;
@@ -101,20 +92,55 @@ main {
   z-index: 1;
 }
 
+/* -------- SEZIONI PARI → CARTA -------- */
+.section:nth-of-type(even) {
+  background-color: var(--bg-main);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .section:nth-of-type(even) {
+    background-image: url("../assets/bg-paper-mobile.png");
+    background-repeat: repeat;
+    background-size: 420px;
+  }
+}
+
+/* desktop */
+@media (min-width: 769px) {
+  .section:nth-of-type(even) {
+    background-image: url("../assets/bg-paper-desktop.png");
+    background-repeat: repeat;
+    background-size: 520px;
+  }
+}
+
 /* =======================
-   HERO + SOLE (SEZIONE 1)
+   HERO (SEZIONE 1)
+   FORZA CARTA + SOLE
 ======================= */
 .hero {
   padding-top: 6rem;
   padding-bottom: 6rem;
+  background-color: var(--bg-main);
 }
 
-/* forza carta anche se è dispari */
-.hero {
-  background-color: var(--bg-main);
-  background-image: url("../assets/bg-paper.png");
-  background-repeat: repeat;
-  background-size: 520px;
+/* hero → carta mobile */
+@media (max-width: 768px) {
+  .hero {
+    background-image: url("../assets/bg-paper-mobile.png");
+    background-repeat: repeat;
+    background-size: 420px;
+  }
+}
+
+/* hero → carta desktop */
+@media (min-width: 769px) {
+  .hero {
+    background-image: url("../assets/bg-paper-desktop.png");
+    background-repeat: repeat;
+    background-size: 520px;
+  }
 }
 
 /* sole */
@@ -135,7 +161,7 @@ main {
 }
 
 /* =======================
-   TITOLI
+   TITOLI / TESTO
 ======================= */
 h1, h2, h3 { margin: 0 0 1rem 0; }
 
@@ -225,13 +251,9 @@ p { margin: 0.6rem 0; }
   justify-content: space-between;
 }
 
-.faq-question::after {
-  content: "+";
-}
+.faq-question::after { content: "+"; }
 
-.faq-question.open::after {
-  content: "×";
-}
+.faq-question.open::after { content: "×"; }
 
 .faq-answer {
   max-height: 0;
@@ -239,9 +261,7 @@ p { margin: 0.6rem 0; }
   transition: max-height 0.4s ease;
 }
 
-.faq-answer.open {
-  max-height: 400px;
-}
+.faq-answer.open { max-height: 400px; }
 
 /* =======================
    FOOTER
@@ -253,7 +273,7 @@ p { margin: 0.6rem 0; }
 }
 
 /* =======================
-   MOBILE
+   MOBILE TUNING
 ======================= */
 @media (max-width: 768px) {
   h1 { font-size: 1.6rem; }
