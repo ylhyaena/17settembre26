@@ -213,7 +213,7 @@ main {
    HERO + SOLE PARALLAX (sezione 1)
 ======================= */
 .hero {
-  padding-top: 0rem;
+  padding-top: 3rem;
   padding-bottom: 6rem;
 }
 
@@ -240,7 +240,7 @@ main {
 
 @media (max-width: 768px) {
   .hero {
-    padding-top: 0rem;
+    padding-top: 1rem;
   }
 }
 
