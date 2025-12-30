@@ -152,7 +152,7 @@ const SUN_PARALLAX_SPEED = 0.03;
 
   const update = () => {
     // negativo = sale verso l’alto più lentamente dello scroll
-    const offset = -(window.scrollY * SUN_PARALLAX_SPEED);
+    const offset = (window.scrollY * SUN_PARALLAX_SPEED);
     hero.style.setProperty('--sun-parallax', `${offset}px`);
     ticking = false;
   };
