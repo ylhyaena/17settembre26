@@ -240,10 +240,10 @@ p { margin: 0.6rem 0; }
 
   .hero::after {
     right: -300px;
-    top: 100px;
+    top: 200px;
     width: 700px;
     height: 700px;
-    opacity: 0.92;
+    opacity: 0.8;
   }
 }
 
