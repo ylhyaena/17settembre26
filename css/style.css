@@ -148,12 +148,12 @@ main {
   content: "";
   position: absolute;
   right: -340px;
-  bottom: -200px;
-  width: 720px;
-  height: 720px;
+  bottom: -820px;
+  width: 620px;
+  height: 620px;
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
-  opacity: 0.9;
+  opacity: 0.8;
   pointer-events: none;
   z-index: 2;
   transform: translate3d(0, var(--sun-parallax), 0);
