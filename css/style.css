@@ -23,13 +23,9 @@
 /* =======================
    RESET / BASE
 ======================= */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
@@ -37,7 +33,6 @@ body {
   color: var(--text-main);
   line-height: 1.65;
 
-  /* SFONDO CARTA */
   background-color: var(--bg-main);
   background-image: url("../assets/bg-paper-desktop.png");
   background-repeat: repeat;
@@ -92,10 +87,7 @@ body {
 /* =======================
    NAV
 ======================= */
-.nav {
-  display: flex;
-  align-items: center;
-}
+.nav { display: flex; align-items: center; }
 
 .nav-list {
   display: flex;
@@ -111,7 +103,6 @@ body {
   text-decoration: none;
   font-weight: 500;
   position: relative;
-  white-space: nowrap;
 }
 
 .nav-list a::after {
@@ -125,9 +116,7 @@ body {
   transition: width 0.3s ease;
 }
 
-.nav-list a:hover::after {
-  width: 100%;
-}
+.nav-list a:hover::after { width: 100%; }
 
 .nav-list a.cta {
   background: var(--accent-tertiary);
@@ -159,7 +148,6 @@ body {
   transform: translateY(0);
 }
 
-/* SEZIONI BEIGE (NO CARTA) */
 .section.alt {
   background-color: var(--bg-alt);
   background-image: none;
@@ -171,39 +159,27 @@ body {
 }
 
 /* =======================
-   TITOLI / TESTO
+   TITOLI
 ======================= */
-h1, h2 {
-  margin: 0 0 1rem 0;
-}
+h1, h2 { margin: 0 0 1rem 0; }
 
-h1 {
-  font-size: 2.2rem;
-  line-height: 1.15;
-}
+h1 { font-size: 2.2rem; line-height: 1.15; }
 
-h2 {
-  font-size: 1.8rem;
-  color: var(--accent-primary);
-}
-
-p {
-  margin: 0.6rem 0;
-}
+h2 { font-size: 1.8rem; color: var(--accent-primary); }
 
 /* =======================
    HERO
 ======================= */
 .hero {
   padding-top: 7rem;
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
   position: relative;
   overflow: hidden;
 }
 
 .hero .container {
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
 /* FOGLIE */
@@ -211,9 +187,9 @@ p {
   content: "";
   position: absolute;
   left: -40px;
-  top: 40px;
-  width: 180px;
-  height: 320px;
+  top: 60px;
+  width: 200px;
+  height: 360px;
   background: url("../assets/leaves.png") no-repeat left top;
   background-size: contain;
   opacity: 0.08;
@@ -221,40 +197,36 @@ p {
   z-index: 1;
 }
 
-/* SOLE */
+/* SOLE — GRANDE, CENTRO-DESTRA */
 .hero::after {
   content: "";
   position: absolute;
-  right: -55px;
-  top: -35px;
-  width: 190px;
-  height: 190px;
+  right: 10%;
+  top: 140px;
+  width: 420px;
+  height: 420px;
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
-  opacity: 0.45;
+  opacity: 0.85;
   pointer-events: none;
   z-index: 1;
 }
 
+/* DESKTOP */
 @media (min-width: 769px) {
-  .hero {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-
   .hero::before {
     left: -90px;
     top: 0;
-    width: 300px;
+    width: 320px;
     height: 100%;
     opacity: 0.12;
   }
 
   .hero::after {
-    right: -120px;
-    top: 80px;
-    width: 360px;
-    height: 360px;
+    right: 15%;
+    top: 120px;
+    width: 520px;
+    height: 520px;
     opacity: 0.9;
   }
 }
@@ -293,15 +265,6 @@ p {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.faq-question::after {
-  content: '+';
-}
-
-.faq-question.open::after {
-  content: '–';
 }
 
 .faq-answer {
@@ -354,9 +317,7 @@ p {
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.5rem; }
 
-  .nav-toggle {
-    display: block;
-  }
+  .nav-toggle { display: block; }
 
   .nav-list {
     display: none;
@@ -370,11 +331,5 @@ p {
     box-shadow: var(--shadow-soft);
   }
 
-  .nav-list.open {
-    display: flex;
-  }
-
-  .nav-list li {
-    padding: 0.5rem 0;
-  }
+  .nav-list.open { display: flex; }
 }
