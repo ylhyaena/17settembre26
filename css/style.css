@@ -217,6 +217,23 @@ main {
   padding-bottom: 6rem;
 }
 
+/* HERO deve essere un contenitore di stacking */
+.hero {
+  position: relative;
+}
+
+/* Il testo della hero DEVE essere positioned per far funzionare z-index */
+.hero .container {
+  position: relative;
+  z-index: 5;   /* testo sopra */
+}
+
+/* Il sole dietro al testo */
+.hero::after {
+  z-index: 1;   /* sole sotto */
+}
+
+
 .hero h1 {
   margin-top: 0;
 }
@@ -250,20 +267,28 @@ main {
   }
 }
 
-/* SOLE: visibile subito in basso a destra, poi sale con parallax */
+/* SOLE:
+   - dietro al testo (z-index più basso del container)
+   - inizio visibile (top:50% e translateY(-50%))
+   - tutto a destra (right negativo ma meno aggressivo)
+*/
 .hero::after {
   content: "";
   position: absolute;
-  right: -340px;
-  top: 300px;
+  top: 50%;
+  right: -240px;          /* tutto a destra ma già visibile */
   width: 720px;
   height: 720px;
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
-  opacity: 0.92;
+  opacity: 0.88;
   pointer-events: none;
+
+  /* dietro al testo, sopra lo sfondo */
   z-index: 2;
-  transform: translate3d(0, var(--sun-parallax), 0);
+
+  /* baseline centro pagina + parallax */
+  transform: translate3d(0, calc(-50% + var(--sun-parallax)), 0);
   will-change: transform;
 }
 
