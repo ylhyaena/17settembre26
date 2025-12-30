@@ -19,17 +19,15 @@ window.addEventListener('scroll', () => {
 const navToggle = document.querySelector('.nav-toggle');
 const navList = document.querySelector('.nav-list');
 
-if (navToggle && navList) {
-  navToggle.addEventListener('click', () => {
-    navList.classList.toggle('open');
-  });
+navToggle.addEventListener('click', () => {
+  navList.classList.toggle('open');
+});
 
-  document.querySelectorAll('.nav-list a').forEach(link => {
-    link.addEventListener('click', () => {
-      navList.classList.remove('open');
-    });
+document.querySelectorAll('.nav-list a').forEach(link => {
+  link.addEventListener('click', () => {
+    navList.classList.remove('open');
   });
-}
+});
 
 
 // =======================
@@ -42,12 +40,12 @@ document.querySelectorAll('.faq-question').forEach(button => {
     document.querySelectorAll('.faq-question.open').forEach(openBtn => {
       if (openBtn !== button) {
         openBtn.classList.remove('open');
-        if (openBtn.nextElementSibling) openBtn.nextElementSibling.classList.remove('open');
+        openBtn.nextElementSibling.classList.remove('open');
       }
     });
 
     button.classList.toggle('open');
-    if (answer) answer.classList.toggle('open');
+    answer.classList.toggle('open');
   });
 });
 
@@ -75,10 +73,22 @@ if ('IntersectionObserver' in window) {
 
 
 // =======================
-// SOLE PARALLAX (DESKTOP + MOBILE)
+// HERO PARALLAX (CONTENUTO) - mantiene il tuo effetto
 // =======================
 const hero = document.querySelector('.hero');
+if (hero) {
+  const heroContent = hero.querySelector('.container');
 
+  window.addEventListener('scroll', () => {
+    if (!heroContent) return;
+    heroContent.style.transform = `translateY(${window.scrollY * 0.05}px)`;
+  }, { passive: true });
+}
+
+
+// =======================
+// SOLE PARALLAX (SEPARATO) - sale più lentamente della pagina
+// =======================
 if (hero) {
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -86,8 +96,8 @@ if (hero) {
     let ticking = false;
 
     const update = () => {
-      // valore negativo: sale più lentamente della pagina
-      const y = -(window.scrollY * 0.18);
+      // negativo => sale, e più lentamente dello scroll
+      const y = -(window.scrollY * 0.12);
       hero.style.setProperty('--sun-parallax', `${y}px`);
       ticking = false;
     };
@@ -103,18 +113,4 @@ if (hero) {
   }
 }
 
-
-// =======================
-// HERO PARALLAX (contenuto hero) - lasciare com'è se lo vuoi
-// =======================
-if (hero) {
-  window.addEventListener('scroll', () => {
-    hero.style.transform = `translateY(${window.scrollY * 0.05}px)`;
-  }, { passive: true });
-}
-
-
-// =======================
-// LOG
-// =======================
 console.log('Sito matrimonio – JS dinamico caricato ✓');
