@@ -3,9 +3,9 @@
 ======================= */
 :root {
   --bg-main: #f8f3ec;
+  --bg-alt: #efe4d8;
 
   --text-main: #2d2d2d;
-  --text-muted: rgba(45, 45, 45, 0.75);
 
   --accent-primary: #7f9f8c;
   --accent-secondary: #cf845e;
@@ -15,24 +15,40 @@
   --radius-small: 6px;
 
   --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.12);
 
-  --font-main: "DM Sans", sans-serif;
-  --header-h: 64px;
+  --font-main: 'DM Sans', sans-serif;
 }
 
 /* =======================
    RESET / BASE
 ======================= */
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
   font-family: var(--font-main);
   color: var(--text-main);
   line-height: 1.65;
-  background: none;
+
+  /* SFONDO CARTA */
+  background-color: var(--bg-main);
+  background-image: url("../assets/bg-paper-desktop.png");
+  background-repeat: repeat;
+  background-size: 600px;
+}
+
+@media (max-width: 768px) {
+  body {
+    background-image: url("../assets/bg-paper-mobile.png");
+    background-size: 420px;
+  }
 }
 
 .container {
@@ -42,68 +58,34 @@ body {
 }
 
 /* =======================
-   SFONDO CARTA
-======================= */
-.paper-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-
-  background-color: var(--bg-main);
-  background-image: url("../assets/bg-paper-mobile.png");
-  background-repeat: repeat;
-  background-size: 420px;
-}
-
-@media (min-width: 769px) {
-  .paper-bg {
-    background-image: url("../assets/bg-paper-desktop.png");
-    background-size: 600px;
-  }
-}
-
-/* =======================
-   STACKING CONTENUTO
-======================= */
-.header,
-.hero {
-  position: relative;
-  z-index: 2;
-}
-
-/* =======================
    HEADER
 ======================= */
 .header {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  height: var(--header-h);
-
+  width: 100%;
+  height: 64px;
+  background: rgba(248, 243, 236, 0.95);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: rgba(248, 243, 236, 0.95);
-  backdrop-filter: blur(6px);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  z-index: 1000;
 }
 
 .header-inner {
   width: 100%;
   max-width: 900px;
   padding: 0 1.4rem;
-
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 1rem;
   color: var(--accent-primary);
 }
 
@@ -111,64 +93,120 @@ body {
    NAV
 ======================= */
 .nav {
-  position: relative;
-}
-
-.nav-toggle {
-  background: none;
-  border: none;
-  font-size: 1.6rem;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
 .nav-list {
+  display: flex;
+  gap: 1.2rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  gap: 1.2rem;
+  align-items: center;
 }
 
 .nav-list a {
+  color: var(--text-main);
   text-decoration: none;
   font-weight: 500;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent-secondary);
+  transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after {
+  width: 100%;
 }
 
 .nav-list a.cta {
   background: var(--accent-tertiary);
-  color: #fff;
-  padding: 0.4rem 0.8rem;
+  color: white;
+  padding: 0.45rem 0.9rem;
   border-radius: var(--radius-small);
 }
 
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
 /* =======================
-   HERO (VISIBILE SUBITO)
+   SEZIONI
+======================= */
+.section {
+  padding: 4rem 0;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SEZIONI BEIGE (NO CARTA) */
+.section.alt {
+  background-color: var(--bg-alt);
+  background-image: none;
+}
+
+.section.highlight {
+  background: var(--accent-tertiary);
+  color: white;
+}
+
+/* =======================
+   TITOLI / TESTO
+======================= */
+h1, h2 {
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: 2.2rem;
+  line-height: 1.15;
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: var(--accent-primary);
+}
+
+p {
+  margin: 0.6rem 0;
+}
+
+/* =======================
+   HERO
 ======================= */
 .hero {
-  min-height: 100vh;
-  padding-top: calc(var(--header-h) + 3rem);
-  padding-bottom: 3rem;
+  padding-top: 7rem;
+  padding-bottom: 4rem;
+  position: relative;
   overflow: hidden;
 }
 
 .hero .container {
   position: relative;
-  z-index: 3;
+  z-index: 2;
 }
 
-h1 {
-  font-size: 2.1rem;
-  margin: 0 0 0.8rem 0;
-}
-
-.hero-meta {
-  margin: 0;
-  color: var(--text-muted);
-}
-
-/* =======================
-   DECORAZIONI HERO
-======================= */
+/* FOGLIE */
 .hero::before {
   content: "";
   position: absolute;
@@ -178,28 +216,35 @@ h1 {
   height: 320px;
   background: url("../assets/leaves.png") no-repeat left top;
   background-size: contain;
-  opacity: 0.1;
-  z-index: 1;
+  opacity: 0.08;
   pointer-events: none;
+  z-index: 1;
 }
 
+/* SOLE */
 .hero::after {
   content: "";
   position: absolute;
-  right: -50px;
-  top: -40px;
+  right: -55px;
+  top: -35px;
   width: 190px;
   height: 190px;
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
-  opacity: 0.5;
-  z-index: 1;
+  opacity: 0.45;
   pointer-events: none;
+  z-index: 1;
 }
 
 @media (min-width: 769px) {
+  .hero {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
   .hero::before {
     left: -90px;
+    top: 0;
     width: 300px;
     height: 100%;
     opacity: 0.12;
@@ -215,25 +260,78 @@ h1 {
 }
 
 /* =======================
-   MOBILE MENU
+   TIMELINE
 ======================= */
-@media (max-width: 768px) {
-  .nav-list {
-    display: none;
-    position: absolute;
-    top: calc(var(--header-h) - 6px);
-    right: 0;
-    flex-direction: column;
-    gap: 0.8rem;
-    background: rgba(248, 243, 236, 0.98);
-    padding: 1rem;
-    border-radius: var(--radius-soft);
-    box-shadow: var(--shadow-soft);
-  }
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0 0;
+}
 
-  .nav-list.open {
-    display: flex;
-  }
+.timeline li {
+  background: white;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1rem;
+}
+
+/* =======================
+   FAQ
+======================= */
+.faq-item {
+  background: white;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1rem;
+  padding: 0 1rem;
+}
+
+.faq-question {
+  padding: 1.2rem 0;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question::after {
+  content: '+';
+}
+
+.faq-question.open::after {
+  content: '–';
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-answer.open {
+  max-height: 400px;
+  padding-bottom: 1rem;
+}
+
+/* =======================
+   MAP
+======================= */
+.map iframe {
+  width: 100%;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  min-height: 300px;
+}
+
+/* =======================
+   FOOTER
+======================= */
+.footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  font-size: 0.9rem;
 }
 
 /* =======================
@@ -244,7 +342,39 @@ h1 {
   top: 0;
   left: 0;
   height: 4px;
-  width: 0%;
   background: var(--accent-secondary);
+  width: 0%;
   z-index: 2000;
+}
+
+/* =======================
+   MOBILE
+======================= */
+@media (max-width: 768px) {
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.5rem; }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    background: var(--bg-main);
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .nav-list.open {
+    display: flex;
+  }
+
+  .nav-list li {
+    padding: 0.5rem 0;
+  }
 }
