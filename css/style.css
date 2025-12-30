@@ -90,19 +90,31 @@ body {
   overflow: hidden;
 }
 
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
 /* sole decorativo */
-.hero::after {
+.hero::before {
   content: "";
   position: absolute;
-  right: -80px;
-  top: -40px;
-  width: 220px;
-  height: 220px;
-  background: url("../assets/sun.png") no-repeat center;
+
+  /* mobile-first positioning */
+  left: -40px;
+  top: 20px;
+  width: 180px;
+  height: 320px;
+
+  background: url("../assets/—Pngtree—antiquity black and white ink_3911022.png")
+    no-repeat left top;
   background-size: contain;
-  opacity: 0.55;
+
+  opacity: 0.08; /* fondamentale su mobile */
   pointer-events: none;
+  z-index: 1;
 }
+
 
 /* =======================
    DESKTOP DECORAZIONI
@@ -111,10 +123,11 @@ body {
   .hero::before {
     content: "";
     position: absolute;
-    left: -100px;
+    left: -90px;
     top: 0;
     width: 300px;
     height: 100%;
+    opacity: 0.12;
     background: url("../assets/leaves.png") no-repeat left center;
     background-size: contain;
     opacity: 0.12;
