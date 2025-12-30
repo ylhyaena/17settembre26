@@ -116,7 +116,7 @@
 
   if (reduceMotion) return;
 
-  const SUN_SPEED = 0.06; // più basso = più lento
+  const SUN_SPEED = 0.08; // più basso = più lento
 
   let ticking = false;
 
