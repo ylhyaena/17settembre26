@@ -243,7 +243,7 @@ a:hover { color: var(--accent-secondary); }
   position: absolute;
 
   right: -220px;   /* tutto a destra ma VISIBILE subito */
-  bottom: -140px;  /* angolo basso-dx visibile all'apertura */
+  bottom: -80px;  /* angolo basso-dx visibile all'apertura */
 
   width: 560px;
   height: 560px;
@@ -251,7 +251,7 @@ a:hover { color: var(--accent-secondary); }
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
 
-  opacity: 0.9;
+  opacity: 0.8;
   pointer-events: none;
   z-index: 2;
 
