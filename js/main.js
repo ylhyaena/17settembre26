@@ -6,7 +6,7 @@
 // 0.03 = lentissimo
 // 0.06 = lento (consigliato)
 // 0.10 = evidente
-const SUN_PARALLAX_SPEED = 0.03;
+const SUN_PARALLAX_SPEED = 0.04;
 
 
 // =======================
@@ -152,7 +152,7 @@ const SUN_PARALLAX_SPEED = 0.03;
 
   const update = () => {
     // negativo = sale verso l’alto più lentamente dello scroll
-    const offset = (window.scrollY * SUN_PARALLAX_SPEED);
+    const offset = -(window.scrollY * SUN_PARALLAX_SPEED);
     hero.style.setProperty('--sun-parallax', `${offset}px`);
     ticking = false;
   };
