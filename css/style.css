@@ -135,10 +135,19 @@ body {
   }
 
   .hero::after {
-    width: 360px;
-    height: 360px;
-    right: -120px;
-    top: 80px;
-    opacity: 0.9;
-  }
+  content: "";
+  position: absolute;
+  right: -50px;
+  top: -30px;
+  width: 180px;
+  height: 180px;
+
+  background: url("../assets/Save the Date (15).png") no-repeat center;
+  background-size: contain;
+
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 1;
+}
+
 }
