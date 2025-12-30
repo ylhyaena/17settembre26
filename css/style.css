@@ -245,7 +245,7 @@ main {
   content: "";
   position: absolute;
   right: -340px;
-  bottom: -200px;
+  bottom: -1000px;
   width: 720px;
   height: 720px;
   background: url("../assets/sun.png") no-repeat center;
