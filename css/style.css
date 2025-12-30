@@ -276,7 +276,7 @@ main {
   content: "";
   position: absolute;
   top: 20%;
-  right: -40px;          /* tutto a destra ma già visibile */
+  right: -120px;          /* tutto a destra ma già visibile */
   width: 720px;
   height: 720px;
   background: url("../assets/sun.png") no-repeat center;
@@ -514,7 +514,7 @@ main {
   .hero::after {
     width: 520px;
     height: 520px;
-    right: -260px;
+    right: -120px;
     top: 20%;
   }
 }
