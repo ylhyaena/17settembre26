@@ -1,53 +1,84 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById("canvas-bg");
-    const ctx = canvas.getContext("2d");
-    let particles = [];
-    const colors = ["#7f9f8c", "#cf845e", "#e8e2d9", "#ffffff"];
+// =======================
+// SCROLL PROGRESS BAR
+// =======================
+const scrollBar = document.createElement('div');
+scrollBar.id = 'scrollProgress';
+document.body.appendChild(scrollBar);
 
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.radius = Math.random() * 40 + 10;
-            this.color = colors[Math.floor(Math.random() * colors.length)];
-            this.opacity = Math.random() * 0.2 + 0.1;
-            this.speedX = (Math.random() - 0.5) * 0.4;
-            this.speedY = (Math.random() - 0.5) * 0.4;
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.globalAlpha = this.opacity;
-            ctx.fill();
-            ctx.globalAlpha = 1;
-        }
-        update() {
-            this.x += this.speedX;
-            this.y += this.speedY;
-            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-        }
-    }
-
-    function init() {
-        resize();
-        particles = [];
-        for (let i = 0; i < 25; i++) particles.push(new Particle());
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animate);
-    }
-
-    init();
-    animate();
-    window.addEventListener("resize", init);
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+  scrollBar.style.width = scrollPercent + '%';
 });
+
+// =======================
+// MENU MOBILE TOGGLE
+// =======================
+const navToggle = document.querySelector('.nav-toggle');
+const navList = document.querySelector('.nav-list');
+
+navToggle.addEventListener('click', () => {
+  navList.classList.toggle('open');
+});
+
+document.querySelectorAll('.nav-list a').forEach(link => {
+  link.addEventListener('click', () => {
+    navList.classList.remove('open');
+  });
+});
+
+// =======================
+// FAQ ACCORDION
+// =======================
+document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', () => {
+    const answer = button.nextElementSibling;
+
+    document.querySelectorAll('.faq-question.open').forEach(openBtn => {
+      if (openBtn !== button) {
+        openBtn.classList.remove('open');
+        openBtn.nextElementSibling.classList.remove('open');
+      }
+    });
+
+    button.classList.toggle('open');
+    answer.classList.toggle('open');
+  });
+});
+
+// =======================
+// SEZIONI & IMMAGINI FADE-IN
+// =======================
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  document.querySelectorAll('.section, .timeline li, img').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// =======================
+// HERO PARALLAX
+// =======================
+const hero = document.querySelector('.hero');
+if (hero) {
+  window.addEventListener('scroll', () => {
+    hero.style.transform = `translateY(${window.scrollY * 0.05}px)`;
+  });
+}
+
+// =======================
+// LOG
+// =======================
+console.log('Sito matrimonio – JS dinamico caricato ✓');
