@@ -1,3 +1,5 @@
+/* css/style.css (COMPLETO) */
+
 /* =======================
    VARIABILI
 ======================= */
@@ -19,6 +21,7 @@
 
   --font-main: 'DM Sans', sans-serif;
 
+  /* parallax sole (set da JS) */
   --sun-parallax: 0px;
 }
 
@@ -38,7 +41,7 @@ body {
 }
 
 main {
-  padding-top: 64px;
+  padding-top: 64px; /* spazio per header fixed */
 }
 
 .container {
@@ -48,15 +51,106 @@ main {
 }
 
 /* =======================
-   SEZIONI BASE
+   HEADER
+======================= */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(248, 243, 236, 0.95);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 900px;
+  padding: 0 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--accent-primary);
+}
+
+/* =======================
+   NAV
+======================= */
+.nav { display: flex; align-items: center; }
+
+.nav-list {
+  display: flex;
+  gap: 1.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-list a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.nav-list a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--accent-secondary);
+  transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after { width: 100%; }
+
+.nav-list a.cta {
+  background: var(--accent-tertiary);
+  color: white;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-small);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-list a.cta:hover {
+  background: var(--accent-secondary);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+/* =======================
+   SEZIONI (BASE + FADE-IN)
 ======================= */
 .section {
   padding: 4rem 0;
-  position: relative;
-  overflow: hidden;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 
 .section.visible {
@@ -64,21 +158,21 @@ main {
   transform: translateY(0);
 }
 
-.section .container {
-  position: relative;
-  z-index: 2;
-}
+.section .container { position: relative; z-index: 2; }
 
 /* ==================================================
-   LOGICA SFONDI AUTOMATICA (PARI / DISPARI)
+   LOGICA SFONDI AUTOMATICA (CORRETTA)
+   - Dispari: CARTA
+   - Pari: BEIGE + FOGLIE
+   - La prima (hero) ha anche il sole
 ================================================== */
 
-/* -------- SEZIONI DISPARI → BEIGE + FOGLIE -------- */
-.section:nth-of-type(odd) {
+/* -------- SEZIONI PARI → BEIGE + FOGLIE -------- */
+.section:nth-of-type(even) {
   background: linear-gradient(to bottom, #efe4d8, #f5ede6);
 }
 
-.section:nth-of-type(odd)::before {
+.section:nth-of-type(even)::before {
   content: "";
   position: absolute;
   left: -70px;
@@ -92,23 +186,23 @@ main {
   z-index: 1;
 }
 
-/* -------- SEZIONI PARI → CARTA -------- */
-.section:nth-of-type(even) {
+/* -------- SEZIONI DISPARI → CARTA -------- */
+.section:nth-of-type(odd) {
   background-color: var(--bg-main);
 }
 
-/* mobile */
+/* carta mobile */
 @media (max-width: 768px) {
-  .section:nth-of-type(even) {
+  .section:nth-of-type(odd) {
     background-image: url("../assets/bg-paper-mobile.png");
     background-repeat: repeat;
     background-size: 420px;
   }
 }
 
-/* desktop */
+/* carta desktop */
 @media (min-width: 769px) {
-  .section:nth-of-type(even) {
+  .section:nth-of-type(odd) {
     background-image: url("../assets/bg-paper-desktop.png");
     background-repeat: repeat;
     background-size: 520px;
@@ -116,12 +210,15 @@ main {
 }
 
 /* =======================
-   HERO (SEZIONE 1)
-   FORZA CARTA + SOLE
+   HERO + SOLE PARALLAX (sezione 1)
 ======================= */
 .hero {
   padding-top: 6rem;
   padding-bottom: 6rem;
+}
+
+/* hero deve essere carta (è già dispari) ma la forziamo esplicitamente */
+.hero {
   background-color: var(--bg-main);
 }
 
@@ -143,46 +240,22 @@ main {
   }
 }
 
-/* sole */
+/* SOLE: visibile subito in basso a destra, poi sale con parallax */
 .hero::after {
   content: "";
   position: absolute;
   right: -340px;
-  bottom: -820px;
-  width: 620px;
-  height: 620px;
+  bottom: -200px;
+  width: 720px;
+  height: 720px;
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
-  opacity: 0.8;
+  opacity: 0.92;
   pointer-events: none;
   z-index: 2;
   transform: translate3d(0, var(--sun-parallax), 0);
   will-change: transform;
 }
-
-/* =======================
-   TITOLI / TESTO
-======================= */
-h1, h2, h3 { margin: 0 0 1rem 0; }
-
-h1 {
-  font-size: 2.6rem;
-  line-height: 1.15;
-}
-
-h2 {
-  font-size: 2rem;
-  color: var(--accent-primary);
-}
-
-h3 {
-  font-size: 1.2rem;
-  color: var(--accent-tertiary);
-}
-
-p { margin: 0.6rem 0; }
-
-.muted { opacity: 0.75; }
 
 /* =======================
    TIMELINE
@@ -194,18 +267,20 @@ p { margin: 0.6rem 0; }
 }
 
 .timeline li {
+  position: relative;
   background: white;
   padding: 1rem 1.2rem;
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
   margin-bottom: 1rem;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .timeline li:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-hover);
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
-  transform: translateY(-3px) scale(1.02);
 }
 
 /* =======================
@@ -216,18 +291,38 @@ p { margin: 0.6rem 0; }
   background: rgba(255,255,255,0.92);
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
-  padding: 1.2rem;
+  padding: 1.2rem 1.2rem;
 }
 
 .iban {
   font-weight: 700;
-  font-family: monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   background: rgba(0,0,0,0.05);
   padding: 0.9rem 1rem;
   border-radius: var(--radius-small);
   display: inline-block;
   margin-top: 0.6rem;
 }
+
+/* =======================
+   BUTTON
+======================= */
+.button {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  background: var(--accent-tertiary);
+  color: white;
+  border-radius: var(--radius-small);
+  font-weight: 600;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-hover);
+}
+
+.button.secondary { background: var(--accent-secondary); }
 
 /* =======================
    FAQ
@@ -242,26 +337,84 @@ p { margin: 0.6rem 0; }
 
 .faq-question {
   width: 100%;
+  text-align: left;
   padding: 1.2rem 0;
   font-weight: 600;
   cursor: pointer;
-  background: none;
-  border: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s ease;
+  background: transparent;
+  border: 0;
+  color: inherit;
 }
 
-.faq-question::after { content: "+"; }
+.faq-question.open { color: var(--accent-secondary); }
 
-.faq-question.open::after { content: "×"; }
+.faq-question::after {
+  content: '+';
+  font-size: 1.3rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.faq-question.open::after {
+  transform: rotate(45deg);
+  color: var(--accent-secondary);
+}
 
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease;
+  transition: max-height 0.4s ease, padding 0.4s ease;
 }
 
-.faq-answer.open { max-height: 400px; }
+.faq-answer.open {
+  max-height: 400px;
+  padding-bottom: 1rem;
+}
+
+/* =======================
+   PLANIMETRIA
+======================= */
+.planimetria-block { margin-top: 2.2rem; }
+
+.planimetria-container {
+  text-align: center;
+  margin: 1.2rem 0 0.4rem 0;
+}
+
+.planimetria-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  transform: rotate(90deg);
+  transform-origin: center center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.planimetria-image:hover {
+  transform: rotate(90deg) scale(1.03);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .planimetria-image { transform: rotate(0deg); }
+}
+
+/* =======================
+   MAP
+======================= */
+.map { margin-top: 1.2rem; }
+
+.map iframe {
+  width: 100%;
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  min-height: 320px;
+  border: 0;
+}
 
 /* =======================
    FOOTER
@@ -273,17 +426,54 @@ p { margin: 0.6rem 0; }
 }
 
 /* =======================
-   MOBILE TUNING
+   SCROLL PROGRESS BAR
+======================= */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--accent-secondary);
+  width: 0%;
+  z-index: 2000;
+  transition: width 0.1s ease-out;
+}
+
+/* =======================
+   MOBILE
 ======================= */
 @media (max-width: 768px) {
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.5rem; }
 
-  .section:nth-of-type(odd)::before {
+  .hero { padding-top: 7rem; padding-bottom: 4rem; }
+
+  .nav-toggle { display: block; }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    background: var(--bg-main);
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .nav-list.open { display: flex; }
+
+  .nav-list li { padding: 0.5rem 0; }
+
+  .button { width: 100%; text-align: center; }
+
+  .section:nth-of-type(even)::before {
     left: -95px;
     top: 10px;
-    width: 220px;
-    height: 400px;
+    width: 240px;
+    height: 420px;
+    opacity: 0.10;
   }
 
   .hero::after {
@@ -291,5 +481,23 @@ p { margin: 0.6rem 0; }
     height: 520px;
     right: -260px;
     bottom: -320px;
+  }
+}
+
+/* =======================
+   DESKTOP
+======================= */
+@media (min-width: 769px) {
+  h1 { font-size: 2.6rem; }
+  h2 { font-size: 2rem; }
+
+  .hero { padding-top: 6rem; padding-bottom: 6rem; }
+
+  .section:nth-of-type(even)::before {
+    left: -110px;
+    top: -10px;
+    width: 340px;
+    height: 620px;
+    opacity: 0.12;
   }
 }
