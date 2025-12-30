@@ -240,7 +240,7 @@ main {
 
 @media (max-width: 768px) {
   .hero {
-    padding-top: 2.4rem;
+    padding-top: 0rem;
   }
 }
 
