@@ -1,13 +1,6 @@
 // js/main.js (COMPLETO)
 
 // =======================
-// CONFIG
-// =======================
-// Più basso = più lento
-const SUN_PARALLAX_SPEED = 0.06;
-
-
-// =======================
 // SCROLL PROGRESS BAR
 // =======================
 (function initScrollProgress() {
@@ -16,7 +9,7 @@ const SUN_PARALLAX_SPEED = 0.06;
   document.body.appendChild(scrollBar);
 
   const onScroll = () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     scrollBar.style.width = scrollPercent + '%';
@@ -45,32 +38,21 @@ const SUN_PARALLAX_SPEED = 0.06;
       navList.classList.remove('open');
     });
   });
-
-  document.addEventListener('click', (e) => {
-    if (!navList.classList.contains('open')) return;
-    const inside = navList.contains(e.target) || navToggle.contains(e.target);
-    if (!inside) navList.classList.remove('open');
-  });
 })();
 
 
 // =======================
-// FAQ ACCORDION (se presente)
+// FAQ ACCORDION
 // =======================
 (function initFaqAccordion() {
-  const questions = document.querySelectorAll('.faq-question');
-  if (!questions.length) return;
-
-  questions.forEach(button => {
+  document.querySelectorAll('.faq-question').forEach(button => {
     button.addEventListener('click', () => {
       const answer = button.nextElementSibling;
-      if (!answer) return;
 
       document.querySelectorAll('.faq-question.open').forEach(openBtn => {
         if (openBtn !== button) {
           openBtn.classList.remove('open');
-          const openAnswer = openBtn.nextElementSibling;
-          if (openAnswer) openAnswer.classList.remove('open');
+          openBtn.nextElementSibling.classList.remove('open');
         }
       });
 
@@ -87,9 +69,6 @@ const SUN_PARALLAX_SPEED = 0.06;
 (function initFadeIn() {
   if (!('IntersectionObserver' in window)) return;
 
-  const els = document.querySelectorAll('.section, .timeline li, img');
-  if (!els.length) return;
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -102,12 +81,30 @@ const SUN_PARALLAX_SPEED = 0.06;
     rootMargin: '0px 0px -50px 0px'
   });
 
-  els.forEach(el => observer.observe(el));
+  document.querySelectorAll('.section, .timeline li, img').forEach(el => {
+    observer.observe(el);
+  });
 })();
 
 
 // =======================
-// SOLE PARALLAX (sale verso alto-destra)
+// HERO PARALLAX (contenuto, non la sezione intera)
+// =======================
+(function initHeroParallax() {
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  const heroContent = hero.querySelector('.container');
+  if (!heroContent) return;
+
+  window.addEventListener('scroll', () => {
+    heroContent.style.transform = `translateY(${window.scrollY * 0.05}px)`;
+  }, { passive: true });
+})();
+
+
+// =======================
+// SOLE PARALLAX (basso-destra -> alto-destra, più lento dello scroll)
 // =======================
 (function initSunParallax() {
   const hero = document.querySelector('.hero');
@@ -119,11 +116,12 @@ const SUN_PARALLAX_SPEED = 0.06;
 
   if (reduceMotion) return;
 
+  const SUN_SPEED = 0.06; // più basso = più lento
+
   let ticking = false;
 
   const update = () => {
-    // negativo => sale verso l'alto mentre scrolli
-    const y = -(window.scrollY * SUN_PARALLAX_SPEED);
+    const y = -(window.scrollY * SUN_SPEED);
     hero.style.setProperty('--sun-parallax', `${y}px`);
     ticking = false;
   };
@@ -138,4 +136,8 @@ const SUN_PARALLAX_SPEED = 0.06;
   update();
 })();
 
+
+// =======================
+// LOG
+// =======================
 console.log('Sito matrimonio – JS dinamico caricato ✓');
