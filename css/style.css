@@ -515,7 +515,7 @@ main {
     width: 520px;
     height: 520px;
     right: -260px;
-    bottom: -320px;
+    top: 35%;
   }
 }
 
