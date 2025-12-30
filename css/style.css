@@ -1,300 +1,45 @@
-/* =======================
-   VARIABILI
-======================= */
-:root {
-  --bg-main: #f8f3ec;
-  --bg-alt: #efe4d8;
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manuel e Ylenia – Matrimonio</title>
 
-  --text-main: #2d2d2d;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 
-  --accent-primary: #7f9f8c;   /* salvia */
-  --accent-secondary: #cf845e; /* terracotta */
-  --accent-tertiary: #2f4f3a;  /* bosco */
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
 
-  --radius-soft: 12px;
-  --radius-small: 6px;
+  <!-- SFONDO CARTA -->
+  <div class="paper-bg"></div>
 
-  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.06);
-  --shadow-hover: 0 12px 36px rgba(0, 0, 0, 0.12);
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">Manuel e Ylenia</div>
+      <nav class="nav">
+        <button class="nav-toggle">☰</button>
+        <ul class="nav-list">
+          <li><a href="#matrimonio">Il matrimonio</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#programma">Programma</a></li>
+          <li><a href="#rsvp" class="cta">RSVP</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  --font-main: 'DM Sans', sans-serif;
-}
+  <!-- HERO -->
+  <section class="hero section">
+    <div class="container">
+      <h1>Manuel e Ylenia</h1>
+      <p class="hero-meta">17 Settembre 2026 · Scandriglia (RI)</p>
+    </div>
+  </section>
 
-/* =======================
-   RESET / BASE
-======================= */
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  font-family: var(--font-main);
-  color: var(--text-main);
-  line-height: 1.65;
-
-  background-color: var(--bg-main);
-  background-image: url("../assets/Save the Date.png");
-  background-repeat: repeat;
-  background-size: 600px;
-}
-
-.container {
-  max-width: 900px;
-  padding: 0 1.4rem;
-  margin: 0 auto;
-}
-
-/* =======================
-   HEADER
-======================= */
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 64px;
-  background: rgba(248, 243, 236, 0.95);
-  backdrop-filter: blur(6px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.header-inner {
-  width: 100%;
-  max-width: 900px;
-  padding: 0 1.4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--accent-primary);
-}
-
-/* =======================
-   NAV
-======================= */
-.nav {
-  display: flex;
-  align-items: center;
-}
-
-.nav-list {
-  display: flex;
-  gap: 1.2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-}
-
-.nav-list a {
-  color: var(--text-main);
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  white-space: nowrap;
-}
-
-.nav-list a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: var(--accent-secondary);
-  transition: width 0.3s ease;
-}
-
-.nav-list a:hover::after {
-  width: 100%;
-}
-
-.nav-list a.cta {
-  background: var(--accent-tertiary);
-  color: white;
-  padding: 0.45rem 0.9rem;
-  border-radius: var(--radius-small);
-}
-
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-/* =======================
-   SEZIONI
-======================= */
-.section {
-  padding: 4rem 0;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-.section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.section.alt {
-  background: linear-gradient(to bottom, #efe4d8, #f5ede6);
-}
-
-.section.highlight {
-  background: var(--accent-tertiary);
-  color: white;
-}
-
-/* =======================
-   TITOLI
-======================= */
-h1, h2 {
-  margin: 0 0 1rem 0;
-}
-
-h1 {
-  font-size: 2.2rem;
-}
-
-h2 {
-  font-size: 1.8rem;
-  color: var(--accent-primary);
-}
-
-/* =======================
-   HERO
-======================= */
-.hero {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero .container {
-  position: relative;
-  z-index: 2;
-}
-
-/* botanica laterale */
-.hero::before {
-  content: "";
-  position: absolute;
-  left: -80px;
-  top: 0;
-  width: 300px;
-  height: 100%;
-  background: url("../assets/—Pngtree—antiquity black and white ink_3911022.png")
-              no-repeat left center;
-  background-size: contain;
-  opacity: 0.12;
-  pointer-events: none;
-}
-
-/* sole */
-.hero::after {
-  content: "";
-  position: absolute;
-  right: -120px;
-  top: 80px;
-  width: 360px;
-  height: 360px;
-  background: url("../assets/Save the Date (15).png") no-repeat center;
-  background-size: contain;
-  opacity: 0.9;
-  pointer-events: none;
-}
-
-/* =======================
-   TIMELINE
-======================= */
-.timeline {
-  list-style: none;
-  padding: 0;
-  margin-top: 2rem;
-}
-
-.timeline li {
-  background: white;
-  padding: 1rem 1.2rem;
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-soft);
-  margin-bottom: 1rem;
-}
-
-/* =======================
-   FAQ
-======================= */
-.faq-item {
-  background: white;
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-soft);
-  margin-bottom: 1rem;
-  padding: 0 1rem;
-}
-
-/* =======================
-   MAP
-======================= */
-.map iframe {
-  width: 100%;
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-soft);
-  min-height: 300px;
-}
-
-/* =======================
-   FOOTER
-======================= */
-.footer {
-  text-align: center;
-  padding: 2.5rem 1rem;
-  font-size: 0.9rem;
-}
-
-/* =======================
-   MOBILE
-======================= */
-@media (max-width: 768px) {
-  h1 { font-size: 1.6rem; }
-  h2 { font-size: 1.4rem; }
-
-  .nav-toggle {
-    display: block;
-  }
-
-  .nav-list {
-    display: none;
-    flex-direction: column;
-    background: var(--bg-main);
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-  }
-
-  .nav-list.open {
-    display: flex;
-  }
-
-  .hero::before,
-  .hero::after {
-    display: none;
-  }
-}
+  <script src="js/main.js"></script>
+</body>
+</html>
