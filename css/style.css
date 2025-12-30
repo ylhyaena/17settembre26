@@ -38,11 +38,6 @@ body {
   color: var(--text-main);
   background: var(--bg-main);
   line-height: 1.65;
-
-  /* SFONDO CARTA */
-  background-image: url("../assets/bg-paper.png");
-  background-repeat: repeat;
-  background-size: 520px;
 }
 
 main {
@@ -90,10 +85,7 @@ main {
 /* =======================
    NAV
 ======================= */
-.nav {
-  display: flex;
-  align-items: center;
-}
+.nav { display: flex; align-items: center; }
 
 .nav-list {
   display: flex;
@@ -150,13 +142,15 @@ main {
 }
 
 /* =======================
-   SEZIONI
+   SEZIONI (BASE + FADE-IN)
 ======================= */
 .section {
   padding: 4rem 0;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 
 .section.visible {
@@ -164,22 +158,42 @@ main {
   transform: translateY(0);
 }
 
-.section.alt {
-  background: linear-gradient(to bottom, #efe4d8, #f5ede6);
-  background-image: none; /* niente carta sotto nelle sezioni beige */
+/* =======================
+   SFONDI SEZIONI
+======================= */
+.section--paper {
+  background-color: var(--bg-main);
+  background-image: url("../assets/bg-paper.png");
+  background-repeat: repeat;
+  background-size: 520px;
 }
 
-.section.highlight {
-  background: var(--accent-tertiary);
-  color: white;
+.section--beige {
+  background: linear-gradient(to bottom, #efe4d8, #f5ede6);
+  background-image: none;
 }
+
+/* elemento decorativo naturale (leaves.png) */
+.section--leaves::before {
+  content: "";
+  position: absolute;
+  left: -70px;
+  top: 40px;
+  width: 260px;
+  height: 520px;
+  background: url("../assets/leaves.png") no-repeat left top;
+  background-size: contain;
+  opacity: 0.10;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section .container { position: relative; z-index: 2; }
 
 /* =======================
    TITOLI / TESTO
 ======================= */
-h1, h2 {
-  margin: 0 0 1rem 0;
-}
+h1, h2, h3 { margin: 0 0 1rem 0; }
 
 h1 {
   font-size: 2.2rem;
@@ -191,7 +205,14 @@ h2 {
   color: var(--accent-primary);
 }
 
+h3 {
+  font-size: 1.2rem;
+  color: var(--accent-tertiary);
+}
+
 p { margin: 0.6rem 0; }
+
+.muted { opacity: 0.75; }
 
 /* =======================
    LINK
@@ -205,56 +226,35 @@ a {
 a:hover { color: var(--accent-secondary); }
 
 /* =======================
-   HERO + DECORAZIONI
+   HERO + SOLE PARALLAX (solo sezione 1)
 ======================= */
 .hero {
   padding-top: 4rem;
   padding-bottom: 4rem;
-  position: relative;
-  overflow: hidden;
-
-  /* variabile usata dal sole */
-  --sun-parallax: 0px;
 }
 
-.hero .container {
-  position: relative;
-  z-index: 3;
+.hero .container { position: relative; z-index: 3; }
+
+.hero-meta {
+  margin-top: 0.5rem;
+  opacity: 0.9;
 }
 
-/* FOGLIE (mobile-first, poi aumenta su desktop) */
-.hero::before {
-  content: "";
-  position: absolute;
-  left: -40px;
-  top: 60px;
-  width: 200px;
-  height: 360px;
-  background: url("../assets/leaves.png") no-repeat left top;
-  background-size: contain;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 1;
-}
+.hero-text { margin-top: 1.2rem; }
 
 /* SOLE: visibile subito in basso a destra, poi sale con parallax */
 .hero::after {
   content: "";
   position: absolute;
-
-  right: -220px;   /* tutto a destra ma VISIBILE subito */
-  bottom: -480px;  /* angolo basso-dx visibile all'apertura */
-
+  right: -220px;
+  bottom: -480px;
   width: 560px;
   height: 560px;
-
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
-
-  opacity: 0.8;
+  opacity: 0.82;
   pointer-events: none;
   z-index: 2;
-
   transform: translate3d(0, var(--sun-parallax), 0);
   will-change: transform;
 }
@@ -286,6 +286,27 @@ a:hover { color: var(--accent-secondary); }
 }
 
 /* =======================
+   CARD (viaggio/sogno)
+======================= */
+.card {
+  margin-top: 1.4rem;
+  background: rgba(255,255,255,0.92);
+  border-radius: var(--radius-soft);
+  box-shadow: var(--shadow-soft);
+  padding: 1.2rem 1.2rem;
+}
+
+.iban {
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(0,0,0,0.05);
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-small);
+  display: inline-block;
+  margin-top: 0.6rem;
+}
+
+/* =======================
    BUTTON
 ======================= */
 .button {
@@ -305,13 +326,6 @@ a:hover { color: var(--accent-secondary); }
 
 .button.secondary { background: var(--accent-secondary); }
 
-.button.cta { animation: pulse 2.5s infinite; }
-
-@keyframes pulse {
-  0%,100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
 /* =======================
    FAQ
 ======================= */
@@ -324,6 +338,8 @@ a:hover { color: var(--accent-secondary); }
 }
 
 .faq-question {
+  width: 100%;
+  text-align: left;
   padding: 1.2rem 0;
   font-weight: 600;
   cursor: pointer;
@@ -331,6 +347,9 @@ a:hover { color: var(--accent-secondary); }
   justify-content: space-between;
   align-items: center;
   transition: color 0.3s ease;
+  background: transparent;
+  border: 0;
+  color: inherit;
 }
 
 .faq-question.open { color: var(--accent-secondary); }
@@ -360,9 +379,11 @@ a:hover { color: var(--accent-secondary); }
 /* =======================
    PLANIMETRIA
 ======================= */
+.planimetria-block { margin-top: 2.2rem; }
+
 .planimetria-container {
   text-align: center;
-  margin: 4rem 0 6rem 0;
+  margin: 1.2rem 0 0.4rem 0;
 }
 
 .planimetria-image {
@@ -387,11 +408,13 @@ a:hover { color: var(--accent-secondary); }
 /* =======================
    MAP
 ======================= */
+.map { margin-top: 1.2rem; }
+
 .map iframe {
   width: 100%;
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
-  min-height: 300px;
+  min-height: 320px;
   border: 0;
 }
 
@@ -425,10 +448,7 @@ a:hover { color: var(--accent-secondary); }
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.5rem; }
 
-  .hero {
-    padding-top: 7rem;
-    padding-bottom: 4rem;
-  }
+  .hero { padding-top: 7rem; padding-bottom: 4rem; }
 
   .nav-toggle { display: block; }
 
@@ -448,9 +468,14 @@ a:hover { color: var(--accent-secondary); }
 
   .nav-list li { padding: 0.5rem 0; }
 
-  .button {
-    width: 100%;
-    text-align: center;
+  .button { width: 100%; text-align: center; }
+
+  .section--leaves::before {
+    left: -95px;
+    top: 10px;
+    width: 240px;
+    height: 420px;
+    opacity: 0.10;
   }
 }
 
@@ -463,19 +488,19 @@ a:hover { color: var(--accent-secondary); }
 
   .hero { padding-top: 6rem; padding-bottom: 6rem; }
 
-  .hero::before {
-    left: -90px;
-    top: 0;
-    width: 320px;
-    height: 100%;
-    opacity: 0.12;
-  }
-
   .hero::after {
     right: -340px;
     bottom: -200px;
     width: 720px;
     height: 720px;
     opacity: 0.92;
+  }
+
+  .section--leaves::before {
+    left: -110px;
+    top: -10px;
+    width: 340px;
+    height: 620px;
+    opacity: 0.12;
   }
 }
