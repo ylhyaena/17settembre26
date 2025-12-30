@@ -275,8 +275,8 @@ main {
 .hero::after {
   content: "";
   position: absolute;
-  top: 50%;
-  right: -240px;          /* tutto a destra ma già visibile */
+  top: 35%;
+  right: -40px;          /* tutto a destra ma già visibile */
   width: 720px;
   height: 720px;
   background: url("../assets/sun.png") no-repeat center;
