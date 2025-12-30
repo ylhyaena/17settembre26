@@ -1,5 +1,3 @@
-/* css/style.css (COMPLETO) */
-
 /* =======================
    VARIABILI
 ======================= */
@@ -9,9 +7,9 @@
 
   --text-main: #2d2d2d;
 
-  --accent-primary: #7f9f8c;   /* salvia */
-  --accent-secondary: #cf845e; /* terracotta */
-  --accent-tertiary: #2f4f3a;  /* bosco */
+  --accent-primary: #7f9f8c;
+  --accent-secondary: #cf845e;
+  --accent-tertiary: #2f4f3a;
 
   --radius-soft: 12px;
   --radius-small: 6px;
@@ -21,7 +19,6 @@
 
   --font-main: 'DM Sans', sans-serif;
 
-  /* parallax sole (set da JS) */
   --sun-parallax: 0px;
 }
 
@@ -41,7 +38,7 @@ body {
 }
 
 main {
-  padding-top: 64px; /* spazio per header fixed */
+  padding-top: 64px;
 }
 
 .container {
@@ -51,106 +48,15 @@ main {
 }
 
 /* =======================
-   HEADER
-======================= */
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 64px;
-  background: rgba(248, 243, 236, 0.95);
-  backdrop-filter: blur(6px);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.header-inner {
-  width: 100%;
-  max-width: 900px;
-  padding: 0 1.4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-weight: 600;
-  font-size: 1rem;
-  color: var(--accent-primary);
-}
-
-/* =======================
-   NAV
-======================= */
-.nav { display: flex; align-items: center; }
-
-.nav-list {
-  display: flex;
-  gap: 1.2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-}
-
-.nav-list a {
-  color: var(--text-main);
-  text-decoration: none;
-  font-weight: 500;
-  position: relative;
-  white-space: nowrap;
-  transition: color 0.3s ease;
-}
-
-.nav-list a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0;
-  height: 2px;
-  background: var(--accent-secondary);
-  transition: width 0.3s ease;
-}
-
-.nav-list a:hover::after { width: 100%; }
-
-.nav-list a.cta {
-  background: var(--accent-tertiary);
-  color: white;
-  padding: 0.45rem 0.9rem;
-  border-radius: var(--radius-small);
-  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.nav-list a.cta:hover {
-  background: var(--accent-secondary);
-  transform: scale(1.05);
-  box-shadow: var(--shadow-hover);
-}
-
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-main);
-}
-
-/* =======================
-   SEZIONI (BASE + FADE-IN)
+   SEZIONI BASE
 ======================= */
 .section {
   padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-  position: relative;
-  overflow: hidden;
 }
 
 .section.visible {
@@ -158,23 +64,30 @@ main {
   transform: translateY(0);
 }
 
+.section .container {
+  position: relative;
+  z-index: 2;
+}
+
 /* =======================
-   SFONDI SEZIONI
+   LOGICA SFONDI (FIX)
 ======================= */
-.section--paper {
+
+/* SEZIONI PARI → CARTA */
+.section:nth-of-type(even) {
   background-color: var(--bg-main);
   background-image: url("../assets/bg-paper.png");
   background-repeat: repeat;
   background-size: 520px;
 }
 
-.section--beige {
+/* SEZIONI DISPARI → BEIGE */
+.section:nth-of-type(odd) {
   background: linear-gradient(to bottom, #efe4d8, #f5ede6);
-  background-image: none;
 }
 
-/* elemento decorativo naturale (leaves.png) */
-.section--leaves::before {
+/* ELEMENTO FOGLIE SOLO SULLE DISPARI */
+.section:nth-of-type(odd)::before {
   content: "";
   position: absolute;
   left: -70px;
@@ -188,20 +101,51 @@ main {
   z-index: 1;
 }
 
-.section .container { position: relative; z-index: 2; }
+/* =======================
+   HERO + SOLE (SEZIONE 1)
+======================= */
+.hero {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+/* forza carta anche se è dispari */
+.hero {
+  background-color: var(--bg-main);
+  background-image: url("../assets/bg-paper.png");
+  background-repeat: repeat;
+  background-size: 520px;
+}
+
+/* sole */
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -340px;
+  bottom: -200px;
+  width: 720px;
+  height: 720px;
+  background: url("../assets/sun.png") no-repeat center;
+  background-size: contain;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 2;
+  transform: translate3d(0, var(--sun-parallax), 0);
+  will-change: transform;
+}
 
 /* =======================
-   TITOLI / TESTO
+   TITOLI
 ======================= */
 h1, h2, h3 { margin: 0 0 1rem 0; }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.6rem;
   line-height: 1.15;
 }
 
 h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: var(--accent-primary);
 }
 
@@ -215,51 +159,6 @@ p { margin: 0.6rem 0; }
 .muted { opacity: 0.75; }
 
 /* =======================
-   LINK
-======================= */
-a {
-  color: var(--accent-primary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover { color: var(--accent-secondary); }
-
-/* =======================
-   HERO + SOLE PARALLAX (solo sezione 1)
-======================= */
-.hero {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-.hero .container { position: relative; z-index: 3; }
-
-.hero-meta {
-  margin-top: 0.5rem;
-  opacity: 0.9;
-}
-
-.hero-text { margin-top: 1.2rem; }
-
-/* SOLE: visibile subito in basso a destra, poi sale con parallax */
-.hero::after {
-  content: "";
-  position: absolute;
-  right: -220px;
-  bottom: -760px;
-  width: 560px;
-  height: 560px;
-  background: url("../assets/sun.png") no-repeat center;
-  background-size: contain;
-  opacity: 0.82;
-  pointer-events: none;
-  z-index: 2;
-  transform: translate3d(0, var(--sun-parallax), 0);
-  will-change: transform;
-}
-
-/* =======================
    TIMELINE
 ======================= */
 .timeline {
@@ -269,62 +168,40 @@ a:hover { color: var(--accent-secondary); }
 }
 
 .timeline li {
-  position: relative;
   background: white;
   padding: 1rem 1.2rem;
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
   margin-bottom: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .timeline li:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: var(--shadow-hover);
   background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
+  transform: translateY(-3px) scale(1.02);
 }
 
 /* =======================
-   CARD (viaggio/sogno)
+   CARD
 ======================= */
 .card {
   margin-top: 1.4rem;
   background: rgba(255,255,255,0.92);
   border-radius: var(--radius-soft);
   box-shadow: var(--shadow-soft);
-  padding: 1.2rem 1.2rem;
+  padding: 1.2rem;
 }
 
 .iban {
   font-weight: 700;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: monospace;
   background: rgba(0,0,0,0.05);
   padding: 0.9rem 1rem;
   border-radius: var(--radius-small);
   display: inline-block;
   margin-top: 0.6rem;
 }
-
-/* =======================
-   BUTTON
-======================= */
-.button {
-  display: inline-block;
-  padding: 0.85rem 1.6rem;
-  background: var(--accent-tertiary);
-  color: white;
-  border-radius: var(--radius-small);
-  font-weight: 600;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-}
-
-.button:hover {
-  transform: scale(1.05);
-  box-shadow: var(--shadow-hover);
-}
-
-.button.secondary { background: var(--accent-secondary); }
 
 /* =======================
    FAQ
@@ -339,83 +216,31 @@ a:hover { color: var(--accent-secondary); }
 
 .faq-question {
   width: 100%;
-  text-align: left;
   padding: 1.2rem 0;
   font-weight: 600;
   cursor: pointer;
+  background: none;
+  border: 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  transition: color 0.3s ease;
-  background: transparent;
-  border: 0;
-  color: inherit;
 }
 
-.faq-question.open { color: var(--accent-secondary); }
-
 .faq-question::after {
-  content: '+';
-  font-size: 1.3rem;
-  transition: transform 0.3s ease, color 0.3s ease;
+  content: "+";
 }
 
 .faq-question.open::after {
-  transform: rotate(45deg);
-  color: var(--accent-secondary);
+  content: "×";
 }
 
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
+  transition: max-height 0.4s ease;
 }
 
 .faq-answer.open {
   max-height: 400px;
-  padding-bottom: 1rem;
-}
-
-/* =======================
-   PLANIMETRIA
-======================= */
-.planimetria-block { margin-top: 2.2rem; }
-
-.planimetria-container {
-  text-align: center;
-  margin: 1.2rem 0 0.4rem 0;
-}
-
-.planimetria-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-soft);
-  transform: rotate(90deg);
-  transform-origin: center center;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-
-.planimetria-image:hover {
-  transform: rotate(90deg) scale(1.03);
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .planimetria-image { transform: rotate(0deg); }
-}
-
-/* =======================
-   MAP
-======================= */
-.map { margin-top: 1.2rem; }
-
-.map iframe {
-  width: 100%;
-  border-radius: var(--radius-soft);
-  box-shadow: var(--shadow-soft);
-  min-height: 320px;
-  border: 0;
 }
 
 /* =======================
@@ -428,79 +253,23 @@ a:hover { color: var(--accent-secondary); }
 }
 
 /* =======================
-   SCROLL PROGRESS BAR
-======================= */
-#scrollProgress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 4px;
-  background: var(--accent-secondary);
-  width: 0%;
-  z-index: 2000;
-  transition: width 0.1s ease-out;
-}
-
-/* =======================
    MOBILE
 ======================= */
 @media (max-width: 768px) {
   h1 { font-size: 1.6rem; }
   h2 { font-size: 1.5rem; }
 
-  .hero { padding-top: 7rem; padding-bottom: 4rem; }
-
-  .nav-toggle { display: block; }
-
-  .nav-list {
-    display: none;
-    flex-direction: column;
-    background: var(--bg-main);
-    position: absolute;
-    top: 64px;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    box-shadow: var(--shadow-soft);
-  }
-
-  .nav-list.open { display: flex; }
-
-  .nav-list li { padding: 0.5rem 0; }
-
-  .button { width: 100%; text-align: center; }
-
-  .section--leaves::before {
+  .section:nth-of-type(odd)::before {
     left: -95px;
     top: 10px;
-    width: 240px;
-    height: 420px;
-    opacity: 0.10;
+    width: 220px;
+    height: 400px;
   }
-}
-
-/* =======================
-   DESKTOP
-======================= */
-@media (min-width: 769px) {
-  h1 { font-size: 2.6rem; }
-  h2 { font-size: 2rem; }
-
-  .hero { padding-top: 6rem; padding-bottom: 6rem; }
 
   .hero::after {
-    right: -340px;
-    bottom: -200px;
-    width: 720px;
-    height: 720px;
-    opacity: 0.92;
-  }
-
-  .section--leaves::before {
-    left: -110px;
-    top: -10px;
-    width: 340px;
-    height: 620px;
-    opacity: 0.12;
+    width: 520px;
+    height: 520px;
+    right: -260px;
+    bottom: -320px;
   }
 }
