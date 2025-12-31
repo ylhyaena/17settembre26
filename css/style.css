@@ -175,13 +175,13 @@ main {
 .section:nth-of-type(even)::before {
   content: "";
   position: absolute;
-  left: -70px;
+  left: 0px;
   top: 40px;
   width: 600px;
   height: 1200px;
   background: url("../assets/leaves.png") no-repeat left top;
   background-size: contain;
-  opacity: 0.10;
+  opacity: 0.80;
   pointer-events: none;
   z-index: 1;
 }
