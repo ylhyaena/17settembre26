@@ -275,13 +275,13 @@ main {
 .hero::after {
   content: "";
   position: absolute;
-  top: 35%;
+  top: 31%;
   right: -190px;          /* tutto a destra ma già visibile */
   width: 720px;
   height: 720px;
   background: url("../assets/sun.png") no-repeat center;
   background-size: contain;
-  opacity: 0.88;
+  opacity: 0.8;
   pointer-events: none;
 
   /* dietro al testo, sopra lo sfondo */
@@ -515,7 +515,8 @@ main {
     width: 520px;
     height: 520px;
     right: -190px;
-    top: 35%;
+    top: 30%;
+     opacity: 0.8;
   }
 }
 
