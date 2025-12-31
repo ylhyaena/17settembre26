@@ -177,8 +177,8 @@ main {
   position: absolute;
   left: -70px;
   top: 40px;
-  width: 260px;
-  height: 520px;
+  width: 600px;
+  height: 1200px;
   background: url("../assets/leaves.png") no-repeat left top;
   background-size: contain;
   opacity: 0.10;
