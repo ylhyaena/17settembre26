@@ -175,13 +175,13 @@ main {
 .section:nth-of-type(even)::before {
   content: "";
   position: absolute;
-  left: 0px;
+  left: -50px;
   top: 50%;
   width: 600px;
   height: 1200px;
   background: url("../assets/leaves.png") no-repeat left top;
   background-size: contain;
-  opacity: 0.80;
+  opacity: 0.60;
   pointer-events: none;
   z-index: 1;
 }
@@ -504,11 +504,11 @@ main {
   .button { width: 100%; text-align: center; }
 
   .section:nth-of-type(even)::before {
-    left: 0px;
+    left: -50px;
     top: 50%;
     width: 600px;
     height: 1200px;
-    opacity: 0.80;
+    opacity: 0.60;
   }
 
   .hero::after {
@@ -530,10 +530,10 @@ main {
   .hero { padding-top: 6rem; padding-bottom: 6rem; }
 
   .section:nth-of-type(even)::before {
-    left: 0px;
+    left: -50px;
     top: 50%;
     width: 600px;
     height: 1200px;
-    opacity: 0.80;
+    opacity: 0.60;
   }
 }
