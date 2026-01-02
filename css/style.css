@@ -175,7 +175,7 @@ main {
 .section:nth-of-type(even)::before {
   content: "";
   position: absolute;
-  left: 0px;
+  left: -100px;
   top: 50%;
   width: 600px;
   height: 1200px;
@@ -504,7 +504,7 @@ main {
   .button { width: 100%; text-align: center; }
 
   .section:nth-of-type(even)::before {
-    left: 0px;
+    left: -100px;
     top: 50%;
     width: 600px;
     height: 1200px;
@@ -530,7 +530,7 @@ main {
   .hero { padding-top: 6rem; padding-bottom: 6rem; }
 
   .section:nth-of-type(even)::before {
-    left: 0px;
+    left: -100px;
     top: 50%;
     width: 600px;
     height: 1200px;
