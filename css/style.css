@@ -176,12 +176,12 @@ main {
   content: "";
   position: absolute;
   left: -100px;
-  top: 50%;
+  bottom: 0%;
   width: 600px;
   height: 1200px;
   background: url("../assets/leaves.png") no-repeat left top;
   background-size: contain;
-  opacity: 0.60;
+  opacity: 0.40;
   pointer-events: none;
   z-index: 1;
 }
@@ -505,10 +505,10 @@ main {
 
   .section:nth-of-type(even)::before {
     left: -100px;
-    top: 50%;
+    bottom: 0%;
     width: 600px;
     height: 1200px;
-    opacity: 0.60;
+    opacity: 0.4;
   }
 
   .hero::after {
@@ -531,9 +531,9 @@ main {
 
   .section:nth-of-type(even)::before {
     left: -100px;
-    top: 50%;
+    bottom: 0%;
     width: 600px;
     height: 1200px;
-    opacity: 0.60;
+    opacity: 0.40;
   }
 }
