@@ -176,7 +176,7 @@ main {
   content: "";
   position: absolute;
   left: -100px;
-  bottom: -200px;
+  bottom: -100%;
   width: 600px;
   height: 1200px;
   background: url("../assets/leaves.png") no-repeat left top;
@@ -505,7 +505,7 @@ main {
 
   .section:nth-of-type(even)::before {
     left: -100px;
-    bottom: -200px;
+    bottom: -100%;
     width: 600px;
     height: 1200px;
     opacity: 0.4;
@@ -531,7 +531,7 @@ main {
 
   .section:nth-of-type(even)::before {
     left: -100px;
-    bottom: -200px;
+    bottom: -100%;
     width: 600px;
     height: 1200px;
     opacity: 0.40;
