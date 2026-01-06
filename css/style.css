@@ -177,4 +177,94 @@ main {
 
   .section:nth-of-type(even)::before {
     content: "";
-    position: abs
+    position: absolute;
+    left: -100%;
+    bottom: -100%;
+    width: 520px;
+    height: 520px;
+    background: url("../assets/leaves.png") no-repeat left bottom;
+    background-size: contain;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---------- NAV MOBILE ---------- */
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: var(--bg-main);
+    padding: 1rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .nav-list.open {
+    display: flex;
+  }
+}
+
+/* =======================
+   TIMELINE
+======================= */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+}
+
+.timeline li {
+  background: white;
+  border-radius: var(--radius-soft);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 1rem;
+}
+
+/* =======================
+   CARD
+======================= */
+.card {
+  background: rgba(255,255,255,0.92);
+  border-radius: var(--radius-soft);
+  padding: 1.2rem;
+  box-shadow: var(--shadow-soft);
+  margin-top: 1.4rem;
+}
+
+.iban {
+  font-family: monospace;
+  background: rgba(0,0,0,0.05);
+  padding: 0.8rem;
+  border-radius: var(--radius-small);
+  display: inline-block;
+}
+
+/* =======================
+   FOOTER
+======================= */
+.footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* =======================
+   SCROLL BAR
+======================= */
+#scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: var(--accent-secondary);
+  width: 0%;
+  z-index: 2000;
+}
