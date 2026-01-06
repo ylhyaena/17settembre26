@@ -145,7 +145,7 @@ main {
 .hero::after {
   content: "";
   position: absolute;
-  top: 30%;
+  top: 50%;
   right: -190px;
   width: 520px;
   height: 520px;
@@ -180,11 +180,11 @@ main {
     position: absolute;
     left: -100%;
     bottom: -100%;
-    width: 520px;
-    height: 520px;
+    /*width: 520px;*/
+    height: 1000px;
     background: url("../assets/leaves.png") no-repeat left bottom;
     background-size: contain;
-    opacity: 0.4;
+    opacity: 0.5;
     pointer-events: none;
     z-index: 1;
   }
